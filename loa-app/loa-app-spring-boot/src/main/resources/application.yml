@@ -1,0 +1,20 @@
+server:
+  port: 8080
+logging:
+  level:
+    root: WARN
+    org.springframework.web: INFO    
+    org.linkedopenactors: INFO
+    org.linkedopenactors.code.kvmadapter: INFO
+    de.naturzukunft.rdf4j.loarepository: INFO
+    de.naturzukunft.rdf4j.loarepository.BaseObjectRepository: TRACE    
+    de.naturzukunft: INFO
+    org.eclipse.rdf4j: WARN    
+app:
+  baseNamespace: http://localhost:8080/
+  searchForChangesInTheLastMinutes: 180
+  kvmUrl: https://api.ofdb.io/v0/
+  baseSubjectKvm: http://linkedopenactors.org/kvm/
+  rdf4jServer: https://rdf.dev.osalliance.com/rdf4j-server/
+  repositoryIdKvm: kvm_loa  
+  repositoryIdWeChange: weChange_loa
