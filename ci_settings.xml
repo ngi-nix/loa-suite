@@ -11,5 +11,10 @@
         </httpHeaders>
       </configuration>
     </server>
+    <server>
+      <id>ossrh</id>
+      <username>${sonatype_jira_id}</username>
+      <password>${sonatype_jira_pwd}</password>
+    </server>    
   </servers>
 </settings>

@@ -108,11 +108,11 @@ public class LoaController {
 		model.addAttribute("pageTitle", "LinkedOpenActors - Publication - " + pub.getAbout().getName());
 		return "publication";
 	}
+
 	/**
 	 * Compare as descibed here: https://github.com/kartevonmorgen/openfairdb/issues/254#issue-575057485
 	 * @param publicationA
 	 * @param publicationB
-	 * @param algorythms
 	 * @return
 	 */
 	@GetMapping(path = "/kvm/wolmanCompare", produces = { "text/turtle" })
