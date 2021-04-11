@@ -12,4 +12,4 @@ app:
   kvmUrl: https://api.ofdb.io/v0/
   baseSubjectKvm: http://linkedopenactors.org/kvm/
   rdf4jServer: https://rdf.dev.osalliance.com/rdf4j-server/
-  repositoryID: kvm_loa  
+  repositoryIdKvm: kvm_loa  

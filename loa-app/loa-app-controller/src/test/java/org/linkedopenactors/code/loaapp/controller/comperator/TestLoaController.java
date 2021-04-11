@@ -22,7 +22,7 @@ class TestLoaController {
 	@Autowired
 	private LoaRDF4JRepositoryManager rdf4JRepositoryManager; 
 	
-	@Test
+//	@Test
 	void testRead() {
 //		ResponseEntity<String> res = toTest.getPublicationTurtle("localhost:8080/kvm/4a28e38695854059a457beb3b53c2578", null);
 //		ResponseEntity<String> res = toTest.getPublicationTurtle("localhost:8080/kvm/72cef4dc7481445b95de7f9d40433710", null);
@@ -44,7 +44,7 @@ class TestLoaController {
 	}
 
 	
-	@Test
+//	@Test
 	void testSparql() {
 		Repository repo = rdf4JRepositoryManager.getKvmRepo();
 		

@@ -19,17 +19,17 @@ before_script:
         
 mvn-install:
     stage: build
-#    only:
-#      refs:
+    only:
+      refs:
 #        - develop
 #        - master
 #        - production
 #        - tags
-#        - /^feature.*$/
+        - /^feature.*$/
 #      variables:
 #        - $FEATURE_NAME == null
     script:
-      - 'mvn clean install -U -s ci_settings.xml'
+      - 'mvn clean install -U -DskipTests -s ci_settings.xml'
 #      - mkdir -p loa-app-spring-boot/target/dependency && (cd loa-app-spring-boot/target/dependency; jar -xf ../*.jar)
 #    artifacts:
 #      paths:
@@ -52,6 +52,18 @@ maven-site:
     artifacts:
       paths:
           - target/staging
+
+maven-deploy:
+    stage: build
+    only: # do not run on feature branch, because it's not  protected and the private.key will not be available!
+      - develop
+      - tags
+    before_script:
+        - gpg --version |grep gpg |cut -d " " -f 3
+        - gpg --import public.key
+        - gpg -v --import --no-tty --batch --yes <(echo "$SSH_PRIVATE_KEY")
+    script:
+        - mvn deploy -Ppublic-deploy_2 -s ci_settings.xml -Dgpg.passphrase=$passphrase
        
 #build-push-image:
 #  stage: package
