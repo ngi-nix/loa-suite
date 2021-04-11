@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.linkedopenactors.code</groupId>
 		<artifactId>loa-app</artifactId>
-		<version>0.0.1-setup_project-SNAPSHOT</version>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>loa-app-spring-boot</artifactId>
 	<name>${project.parent.artifactId}.${project.artifactId}</name>
