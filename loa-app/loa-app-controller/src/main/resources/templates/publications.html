@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+	<table>
+    <tr data-th-each="binding : ${bindings}">
+        <td data-th-text="${binding.name}">...</td>
+        <td data-th-text="${binding.value}">...</td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<table>
+    <tr data-th-each="algorithmsItem : ${algorithmsItems}">
+        <td><a th:href="@{${algorithmsItem.howToLink}}" th:text="${algorithmsItem.name}">...</a></td>
+        <td data-th-text="${algorithmsItem.description}">...</td>
+    </tr>
+</table>
+</body>
+</html>

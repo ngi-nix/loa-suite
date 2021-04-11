@@ -1,0 +1,17 @@
+server:
+  port: 8085
+logging:
+  level:
+    root: WARN
+    org.springframework.web: WARN
+    org.linkedopenactors: TRACE
+    de.naturzukunft.rdf4j: TRACE
+    de.naturzukunft.rdf4j.loarepository: INFO
+    org.eclipse.rdf4j: WARN    
+    reactor.netty.http.client: DEBUG
+app:
+  searchForChangesInTheLastMinutes: 180
+  kvmUrl: https://api.ofdb.io/v0/
+  baseSubjectKvm: http://linkedopenactors.org/kvm/
+  rdf4jServer: https://rdf.dev.osalliance.com/rdf4j-server/
+  repositoryIdKvm: kvm  

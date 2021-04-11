@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title th:text="${pageTitle}">title</title>
+<link rel="stylesheet" href="/publications.css">
+<!-- <script type="application/ld+json" th:utext="${jsonld}" ></script>  -->
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="main-body"></div>
+		<div class="col-md-8">
+			<div class="card mb-3">
+				<div class="card-body">
+					<h2>Publication</h2>
+					<div class="row">
+						<div class="col-sm-3">
+							<h6 class="mb-0">Identifier</h6>
+						</div>
+						<div class="col-sm-9 text-secondary">
+							<span th:text="*{publication.identifier}">..identifier..</span>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-sm-3">
+							<h6 class="mb-0">Description</h6>
+						</div>
+						<div class="col-sm-9 text-secondary">
+							<span th:text="*{publication.description}">..description..</span>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-sm-3">
+							<h6 class="mb-0">Created</h6>
+						</div>
+						<div class="col-sm-9 text-secondary">
+							<span th:text="*{publication.dateCreated}">..dateCreated..</span>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-sm-3">
+							<h6 class="mb-0">Modified</h6>
+						</div>
+						<div class="col-sm-9 text-secondary">
+							<span th:text="*{publication.dateModified}">..dateModified..</span>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-sm-3">
+							<h6 class="mb-0">Keywords</h6>
+						</div>
+						<div class="col-sm-9 text-secondary">
+							<span th:text="*{publication.keywords}">..keywords..</span>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-sm-3">
+							<h6 class="mb-0">Status</h6>
+						</div>
+						<div class="col-sm-9 text-secondary">
+							<span th:text="*{publication.creativeWorkStatus}">..creativeWorkStatus..</span>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-sm-3">
+							<h6 class="mb-0">License</h6>
+						</div>
+						<div class="col-sm-9 text-secondary">
+							<span th:text="*{publication.license}">..license..</span>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-sm-3">
+							<h6 class="mb-0">Copyright</h6>
+						</div>
+						<div class="col-sm-9 text-secondary">
+							<span th:text="*{publication.copyrightNotice}">..copyrightNotice..</span>
+						</div>
+					</div>
+					<hr>
+					<h2>Organisation</h2>
+					<div class="row">
+						<div class="col-sm-3">
+							<h6 class="mb-0">Name/Legalname</h6>
+						</div>
+						<div class="col-sm-9 text-secondary">
+							<span th:text="*{publication.about.name}">..name..</span> / <span
+								th:text="*{publication.about.legalName}">..legalName..</span>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-sm-3">
+							<h6 class="mb-0">Homepage</h6>
+						</div>
+						<div class="col-sm-9 text-secondary">
+							<span th:text="*{publication.about.url}">..url..</span>
+						</div>
+					</div>
+					<hr>
+					<h2>ContactPoint</h2>
+					<div class="row">
+						<div class="col-sm-3">
+							<h6 class="mb-0">Name</h6>
+						</div>
+						<div class="col-sm-9 text-secondary">
+							<span th:text="*{publication.about.contactPoint.name}">..name..</span>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-sm-3">
+							<h6 class="mb-0">Email</h6>
+						</div>
+						<div class="col-sm-9 text-secondary">
+							<span th:text="*{publication.about.contactPoint.email}">..email..</span>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-sm-3">
+							<h6 class="mb-0">Telephone</h6>
+						</div>
+						<div class="col-sm-9 text-secondary">
+							<span th:text="*{publication.about.contactPoint.telephone}">..telephone..</span>
+						</div>
+					</div>
+					<hr>
+					<h2>Location</h2>
+					<div class="row">
+						<div class="col-sm-3">
+							<h6 class="mb-0">Latitude</h6>
+						</div>
+						<div class="col-sm-9 text-secondary">
+							<span th:text="*{publication.about.location.latitude}">..latitude..</span>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-sm-3">
+							<h6 class="mb-0">Longitude</h6>
+						</div>
+						<div class="col-sm-9 text-secondary">
+							<span th:text="*{publication.about.location.longitude}">..longitude..</span>
+						</div>
+					</div>
+					<hr>
+					<h2>Address</h2>
+					<div class="row">
+						<div class="col-sm-3">
+							<h6 class="mb-0">Street</h6>
+						</div>
+						<div class="col-sm-9 text-secondary">
+							<span
+								th:text="*{publication.about.location.postalAddress.streetAddress}">..streetAddress..</span>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-sm-3">
+							<h6 class="mb-0">Zip - Locality</h6>
+						</div>
+						<div class="col-sm-9 text-secondary">
+							<span
+								th:text="*{publication.about.location.postalAddress.postalCode}">..postalCode..</span>
+							- <span
+								th:text="*{publication.about.location.postalAddress.addressLocality}">..addressLocality..</span>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-sm-3">
+							<h6 class="mb-0">Country - Region</h6>
+						</div>
+						<div class="col-sm-9 text-secondary">
+							<span
+								th:text="*{publication.about.location.postalAddress.addressCountry}">..addressCountry..</span>
+							- <span
+								th:text="*{publication.about.location.postalAddress.addressRegion}">..addressRegion..</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
