@@ -5,9 +5,7 @@ variables:
 
 stages:
   - build
-  - package
   - deploy
-  - release
 
 cache:
     key: "$CI_COMMIT_REF_NAME"
@@ -39,7 +37,7 @@ mvn-install:
       expire_in: 1 day
 
 maven-site:
-    stage: build
+    stage: deploy
     only: # do not run on feature branch, because it's not  protected and the private.key will not be available!
       - develop
       - tags
@@ -62,7 +60,7 @@ maven-deploy:
         - mvn deploy -Ppublic-deploy_2 -s ci_settings.xml -Dgpg.passphrase=$passphrase
        
 build-push-image:
-  stage: package
+  stage: deploy
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
