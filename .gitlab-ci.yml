@@ -30,13 +30,13 @@ mvn-install:
 #        - $FEATURE_NAME == null
     script:
       - 'mvn clean install -U -DskipTests -s ci_settings.xml'
-#      - mkdir -p loa-app-spring-boot/target/dependency && (cd loa-app-spring-boot/target/dependency; jar -xf ../*.jar)
-#    artifacts:
-#      paths:
-#          - loa-app-spring-boot/target/classes/
-#          - loa-app-spring-boot/target/generated-sources/
-#          - loa-app-spring-boot/target/dependency/
-#     expire_in: 1 day
+      - mkdir -p loa-app/loa-app-spring-boot/target/dependency && (cd loa-app/loa-app-spring-boot/target/dependency; jar -xf ../*.jar)
+    artifacts:
+      paths:
+          - loa-app/loa-app-spring-boot/target/classes/
+          - loa-app/loa-app-spring-boot/target/generated-sources/
+          - loa-app/loa-app-spring-boot/target/dependency/
+      expire_in: 1 day
 
 maven-site:
     stage: build
@@ -61,13 +61,13 @@ maven-deploy:
     script:
         - mvn deploy -Ppublic-deploy_2 -s ci_settings.xml -Dgpg.passphrase=$passphrase
        
-#build-push-image:
-#  stage: package
-#  image:
-#    name: gcr.io/kaniko-project/executor:debug
-#    entrypoint: [""]
-#  script:
-#    - mkdir -p /kaniko/.docker
-#    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-#    - /kaniko/executor --context $CI_PROJECT_DIR/loa-app-spring-boot --dockerfile $CI_PROJECT_DIR/loa-app-spring-boot/Dockerfile --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+build-push-image:
+  stage: package
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR/loa-app/loa-app-spring-boot --dockerfile $CI_PROJECT_DIR/loa-app/loa-app-spring-boot/Dockerfile --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
     
