@@ -70,6 +70,9 @@ build-push-image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
   script:
+    - ls -lsa $CI_PROJECT_DIR/loa-app/loa-app-spring-boot
+    - ls -lsa $CI_PROJECT_DIR/loa-app/loa-app-spring-boot/target
+    - ls -lsa $CI_PROJECT_DIR/loa-app/loa-app-spring-boot/target/dependency
     - mkdir -p /kaniko/.docker
     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
     - /kaniko/executor --context $CI_PROJECT_DIR/loa-app/loa-app-spring-boot --dockerfile $CI_PROJECT_DIR/loa-app/loa-app-spring-boot/Dockerfile --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
