@@ -52,7 +52,7 @@ maven-deploy:
         - gpg -v --import --no-tty --batch --yes <(echo "$SSH_PRIVATE_KEY")
     script:
         - mvn deploy -Ppublic-deploy_2 -s ci_settings.xml -Dgpg.passphrase=$passphrase
-        - mkdir -p loa-app/loa-app-spring-boot/target/dependency && (cd loa-app/loa-app-spring-boot/target/dependency; jar -xf ../*.jar)
+        - mkdir -p loa-app/loa-app-spring-boot/target/dependency && (cd loa-app/loa-app-spring-boot/target/dependency; jar -xf ../app.jar)
     artifacts:
       paths:
           - loa-app/loa-app-spring-boot/target/classes/
