@@ -40,13 +40,9 @@ mvn-install:
 
 maven-site:
     stage: build
-#    only:
-#      refs:
-#        - master
-#        - production
-#        - tags
-#      variables:
-#        - $FEATURE_NAME == null
+    only: # do not run on feature branch, because it's not  protected and the private.key will not be available!
+      - develop
+      - tags
     script:
       - 'mvn verify site:site site:stage -s ci_settings.xml'
     artifacts:
