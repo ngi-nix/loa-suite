@@ -15,6 +15,7 @@ import org.linkedopenactors.code.loaAlgorithm.AlgorithmRepository;
 import org.linkedopenactors.code.loaAlgorithm.LoaAlgorithm;
 import org.linkedopenactors.code.loaapp.controller.comperator.algorithms.GeoLocationAlgorithm;
 import org.linkedopenactors.code.loaapp.controller.infrastructure.config.LoaRDF4JRepositoryManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
@@ -31,14 +32,22 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class WolmanComperator implements LoaComparator {
 
-	private LoaRDF4JRepositoryManager rdf4jRepositoryManager;
+//	private LoaRDF4JRepositoryManager rdf4jRepositoryManager;
 	private AlgorithmRepository algorithmRepository;
+//	private PublicationRepo getKvmPublicationRepo;
+	
+	@Autowired
+	@Qualifier("KvmPublicationRepo")
 	private PublicationRepo getKvmPublicationRepo;
 
-	public WolmanComperator(LoaRDF4JRepositoryManager rdf4jRepositoryManager, AlgorithmRepository algorithmRepository, PublicationRepo getKvmPublicationRepo) {
-		this.rdf4jRepositoryManager = rdf4jRepositoryManager;
+
+	public WolmanComperator(//LoaRDF4JRepositoryManager rdf4jRepositoryManager, 
+			AlgorithmRepository algorithmRepository
+//			, @Qualifier(value = "KvmPublicationRepo") PublicationRepo getKvmPublicationRepo
+			) {
+//		this.rdf4jRepositoryManager = rdf4jRepositoryManager;
 		this.algorithmRepository = algorithmRepository;
-		this.getKvmPublicationRepo = getKvmPublicationRepo;
+//		this.getKvmPublicationRepo = getKvmPublicationRepo;
 	}
 	
 	@Override
