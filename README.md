@@ -10,7 +10,7 @@ This is the linked-open-actors () main project. A so called Maven-Multi-Module p
         - loa-app-spring-boot
     - loa-adapters
         - [loa-kvm-adapter](loa-adapters/loa-kvm-adapter/README.md)  
-        - loa-wechange-adapter
+        - [loa-wechange-adapter](loa-adapters/loa-wechange-adapter/README.md)  
     - loa-algorithms
         - loa-algorithm
         - loa-fuzzySearchAlgorithms
