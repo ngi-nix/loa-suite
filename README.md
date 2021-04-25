@@ -27,3 +27,7 @@ There is a latest image of each git-branch. Normally you should use the latest i
 `docker run -p8080:8080 registry.gitlab.com/linkedopenactors/loa-suite:master`
 
 After the image is started, you can access the app: http://localhost:8080/
+
+# Development Environment
+Currently there is one instance running, that is public available.  
+This is our [development instance](https://loa.test.opensourceecology.de/), that is provided by [Makers4Humanity](https://www.m4h.network/) & [Open Source Ecology ](https://opensourceecology.de/)
