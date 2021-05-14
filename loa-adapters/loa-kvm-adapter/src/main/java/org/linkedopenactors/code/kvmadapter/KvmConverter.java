@@ -68,7 +68,7 @@ public class KvmConverter {
 				.type(Set.of(SCHEMA_ORG.Organization, AS.Object))
 				.name(entry.getTitle())
 //				.addLegalName("Mannesmann AG")
-				.location(place)
+				.placeLocation(place)
 				.contactPoint(contactPoint);
 		
 		if( entry.getHomepage()!=null ) {

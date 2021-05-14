@@ -18,10 +18,12 @@ import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.repository.RepositoryResult;
+import org.springframework.stereotype.Component;
 
 import de.naturzukunft.rdf4j.ommapper.Converter;
 import de.naturzukunft.rdf4j.vocabulary.SCHEMA_ORG;
 
+@Component
 public class PublicationRepo extends BaseObjectRepository <PublicationLoa> implements LastSyncDateStore {
 
 	public PublicationRepo(Repository repository, Converter<PublicationLoa> converter, Namespace... namespace) {		

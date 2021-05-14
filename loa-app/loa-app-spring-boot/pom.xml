@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.linkedopenactors.code</groupId>
 		<artifactId>loa-app</artifactId>
-		<version>0.0.3-SNAPSHOT</version>
+		<version>0.0.3-documentation-SNAPSHOT</version>
 	</parent>
 	<artifactId>loa-app-spring-boot</artifactId>
 	<name>${project.parent.artifactId}.${project.artifactId}</name>
@@ -31,6 +31,10 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+	 	<dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-actuator</artifactId>
+	    </dependency>
 	</dependencies>
 
 	<build>

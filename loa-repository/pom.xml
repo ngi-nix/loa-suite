@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.linkedopenactors.code</groupId>
 		<artifactId>loa-suite</artifactId>
-		<version>0.0.3-SNAPSHOT</version>
+		<version>0.0.3-documentation-SNAPSHOT</version>
 	</parent>
 	<artifactId>loa-repository</artifactId>
 	<name>${project.parent.artifactId}.${project.artifactId}</name>
@@ -39,6 +39,11 @@
 			<groupId>org.eclipse.rdf4j</groupId>
 			<artifactId>rdf4j-storage</artifactId>
 			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

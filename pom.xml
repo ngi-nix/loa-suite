@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>org.linkedopenactors.code</groupId>
 	<artifactId>loa-suite</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.3-documentation-SNAPSHOT</version>
 	<name>${project.artifactId}</name>
 	<packaging>pom</packaging>
 	<modules>
@@ -20,7 +20,7 @@
 		<module>loa-app</module>
 	</modules>
 	<properties>
-		<rdf4jtools.version>0.0.6</rdf4jtools.version>
+		<rdf4jtools.version>0.0.10</rdf4jtools.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
