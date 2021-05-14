@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.linkedopenactors.code</groupId>
 		<artifactId>loa-algorithms</artifactId>
-		<version>0.0.3-documentation-SNAPSHOT</version>
+		<version>0.0.3-documentation</version>
 	</parent>
 	<artifactId>loa-distanceCalculator</artifactId>
 	<name>${project.parent.artifactId}.${project.artifactId}</name>

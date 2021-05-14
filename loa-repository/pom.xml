@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.linkedopenactors.code</groupId>
 		<artifactId>loa-suite</artifactId>
-		<version>0.0.3-documentation-SNAPSHOT</version>
+		<version>0.0.3-documentation</version>
 	</parent>
 	<artifactId>loa-repository</artifactId>
 	<name>${project.parent.artifactId}.${project.artifactId}</name>
