@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.linkedopenactors.code</groupId>
     <artifactId>loa-suite</artifactId>
-    <version>0.0.3-documentation</version>
+    <version>0.0.4-documentation-SNAPSHOT</version>
   </parent>
   <artifactId>loa-adapters</artifactId>
   <name>${project.parent.artifactId}.${project.artifactId}</name>
