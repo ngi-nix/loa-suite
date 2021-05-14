@@ -1,6 +1,6 @@
 package de.naturzukunft.rdf4j.loarepository;
 
-import activitystreamsde.naturzukunft.rdf4j.activitystreams.model.AsObject;
+import de.naturzukunft.rdf4j.activitystreams.model.AsObject;
 import de.naturzukunft.rdf4j.ommapper.Iri;
 import de.naturzukunft.rdf4j.vocabulary.SCHEMA_ORG;
 import lombok.Data;

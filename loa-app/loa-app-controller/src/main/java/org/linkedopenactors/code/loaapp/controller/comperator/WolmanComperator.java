@@ -14,7 +14,6 @@ import org.linkedopenactors.code.loaAlgorithm.AlgorithmName;
 import org.linkedopenactors.code.loaAlgorithm.AlgorithmRepository;
 import org.linkedopenactors.code.loaAlgorithm.LoaAlgorithm;
 import org.linkedopenactors.code.loaapp.controller.comperator.algorithms.GeoLocationAlgorithm;
-import org.linkedopenactors.code.loaapp.controller.infrastructure.config.LoaRDF4JRepositoryManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -72,8 +71,8 @@ public class WolmanComperator implements LoaComparator {
 			new RuntimeException("publicationB does not have an organisation");
 		}
 		
-		PlaceLoa placeA = pubA.getAbout().getLocation();
-		PlaceLoa placeB = pubB.getAbout().getLocation();
+		PlaceLoa placeA = pubA.getAbout().getPlaceLocation();
+		PlaceLoa placeB = pubB.getAbout().getPlaceLocation();
 
 		ContactPointLoa contactPointA = pubA.getAbout().getContactPoint();
 		ContactPointLoa contactPointB = pubB.getAbout().getContactPoint();

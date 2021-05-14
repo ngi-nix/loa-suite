@@ -142,7 +142,7 @@ public class InitialLoadTurtleFileCrator {
 				.type(Set.of(SCHEMA_ORG.Organization, AS.Object))
 				.name(record.get(KvmCsvNames.title))
 //				.addLegalName("Mannesmann AG")
-				.location(place)
+				.placeLocation(place)
 				.contactPoint(contactPoint);
 		
 		if( StringUtils.hasText(record.get(KvmCsvNames.homepage))) {

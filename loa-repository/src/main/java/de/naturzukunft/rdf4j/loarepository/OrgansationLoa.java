@@ -4,7 +4,7 @@ import java.util.Set;
 
 import org.eclipse.rdf4j.model.IRI;
 
-import activitystreamsde.naturzukunft.rdf4j.activitystreams.model.AsObject;
+import de.naturzukunft.rdf4j.activitystreams.model.AsObject;
 import de.naturzukunft.rdf4j.ommapper.Iri;
 import de.naturzukunft.rdf4j.vocabulary.SCHEMA_ORG;
 import lombok.Data;
@@ -23,7 +23,7 @@ public class OrgansationLoa extends AsObject{
 	private String legalName;	
 	
 	@Iri(SCHEMA_ORG.NAMESPACE + "location" )
-	private PlaceLoa location;
+	private PlaceLoa placeLocation;
 	
 	@Iri(SCHEMA_ORG.NAMESPACE + "name" )
 	private String name;
