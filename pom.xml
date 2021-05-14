@@ -20,7 +20,7 @@
 		<module>loa-app</module>
 	</modules>
 	<properties>
-		<rdf4jtools.version>0.0.11-SNAPSHOT</rdf4jtools.version>
+		<rdf4jtools.version>0.0.10</rdf4jtools.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
