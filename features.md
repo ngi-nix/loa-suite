@@ -14,6 +14,8 @@ You are able to see an overview of all available algorithms. By clicking on the 
 
 So we fullfill the requirmenst of a [loa-algorithm-provider](https://linkedopenactors.gitlab.io/loa-specification/#loa-algorithm-provider)
 
+See also [merging-loa-organisations](https://linkedopenactors.gitlab.io/loa-specification/#merging-loa-organisations)
+
 * [HTML Overview](https://loa.test.opensourceecology.de/algorithms)  
 * Turtle overview  
 `curl -H "Accept: text/turtle" --location --request GET 'http://localhost:8080/algorithms'`
