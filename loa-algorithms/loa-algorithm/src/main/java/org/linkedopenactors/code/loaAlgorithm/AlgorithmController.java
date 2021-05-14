@@ -63,20 +63,20 @@ public class AlgorithmController {
 		}	
 	}
 
-	@GetMapping(path = "/algorithm/{name}", produces = { "text/html" })
-	public String getAlgorithm(@PathVariable String name, Model model) {
-		if(availableAlgorythms.containsKey(name)) {
-			LoaAlgorithm<?> algorithm = availableAlgorythms.get(name);
-			
-			model.addAttribute("algorithm", AlgorithmsItem.builder()
-													.name(algorithm.getName())
-													.description(algorithm.getDescription())
-													.build());
-			return name;
-		} else {
-			throw new RuntimeException(name + " unknown");
-		}	
-	}
+//	@GetMapping(path = "/algorithm/{name}", produces = { "text/html" })
+//	public String getAlgorithm(@PathVariable String name, Model model) {
+//		if(availableAlgorythms.containsKey(name)) {
+//			LoaAlgorithm<?> algorithm = availableAlgorythms.get(name);
+//			
+//			model.addAttribute("algorithm", AlgorithmsItem.builder()
+//													.name(algorithm.getName())
+//													.description(algorithm.getDescription())
+//													.build());
+//			return name;
+//		} else {
+//			throw new RuntimeException(name + " unknown");
+//		}	
+//	}
 	
 	@GetMapping(path = "/algorithm/{name}", produces = { "text/turtle" })
 	public ResponseEntity<String> getAlgorithmTurtle(@PathVariable String name, Model model) {

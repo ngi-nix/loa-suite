@@ -64,8 +64,7 @@ public class FuzzyFuzzyController {
 				break;
 							
 			default:
-				algoToUse = fuzzySearchRatioAlgorithm;
-				break;
+				throw new RuntimeException("unknown algorithm: " + algorithmName);
 		}
 		Integer result = algoToUse.compare(textA, textB);
 		return new ResponseEntity<String>(result.toString(), HttpStatus.OK);

@@ -12,12 +12,13 @@ logging:
     org.eclipse.rdf4j: WARN    
 management:
   endpoints:
-    web:
-      exposure:
-        include: "*"
+    enabled-by-default: false
   endpoint:
     health:
+      enabled: true
       show-details: always
+    info:
+      enabled: true
 app:
   baseNamespace: http://localhost:8080/
   searchForChangesInTheLastMinutes: 180
