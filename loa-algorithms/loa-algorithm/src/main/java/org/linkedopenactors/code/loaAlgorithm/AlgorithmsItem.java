@@ -9,4 +9,5 @@ public class AlgorithmsItem {
 	private String name;
 	private String description;
 	private String howToLink;
+	private String namespace;
 }

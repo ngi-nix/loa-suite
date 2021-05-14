@@ -9,9 +9,10 @@
 	<h1>DistanceCalculator</h1>
 	<p>Calculates the distance between two GPS coordinates using the <a href="https://en.wikipedia.org/wiki/Haversine_formula">Haversine formula.</a></p>
 	<h2>Sample call:</h2>
-	<a href="http://localhost:8080/distanceCalculator/compare?latA=48.1240557&lonA=11.6560609&latB=48.122079&lonB=11.6173942">http://localhost:8080/distanceCalculator/compare?latA=48.1240557&lonA=11.6560609&latB=48.122079&lonB=11.6173942</a>
+	<a th:href="@{/distanceCalculator/compare?latA=48.1240557&lonA=11.6560609&latB=48.122079&lonB=11.6173942}" th:text="@{/distanceCalculator/compare?latA=48.1240557&lonA=11.6560609&latB=48.122079&lonB=11.6173942}">...</a>
+
 	<h2>curl:</h2>
-	<code>curl --location --request GET 'http://localhost:8080/distanceCalculator/compare?latA=48.1240557&lonA=11.6560609&latB=48.122079&lonB=11.6173942'<code>
+	<code>curl --location --request GET '<span th:text="${algorithm.namespace}">.</span>distanceCalculator/compare?latA=48.1240557&lonA=11.6560609&latB=48.122079&lonB=11.6173942'<code>
 	<h2>Java library:</h2>
 	You find the Java Class <code>org.linkedopenactors.code.distancecalculator.DistanceCalculator<code> in the library:
 	<pre>

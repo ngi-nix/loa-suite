@@ -20,7 +20,8 @@ management:
     info:
       enabled: true
 app:
-  baseNamespace: http://localhost:8080/
+#  baseNamespace: http://localhost:8080/
+  baseNamespace: https://loa.test.opensourceecology.de/
   searchForChangesInTheLastMinutes: 180
   kvmUrl: https://api.ofdb.io/v0/
   baseSubjectKvm: http://linkedopenactors.org/kvm/

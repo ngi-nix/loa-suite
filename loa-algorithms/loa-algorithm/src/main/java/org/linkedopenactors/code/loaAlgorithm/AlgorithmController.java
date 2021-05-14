@@ -56,6 +56,7 @@ public class AlgorithmController {
 			model.addAttribute("algorithm", AlgorithmsItem.builder()
 													.name(algorithm.getName())
 													.description(algorithm.getDescription())
+													.namespace(baseNamespace)
 													.build());
 			return name + "HowTo";
 		} else {
