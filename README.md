@@ -28,6 +28,14 @@ There is a latest image of each git-branch. Normally you should use the latest i
 
 After the image is started, you can access the app: http://localhost:8080/
 
+**Getting a list of algorithms:**  
+`curl -H "Accept: text/turtle" --location --request GET 'http://localhost:8080/algorithms'`
+
+**Getting detail of a algorithm:**  
+`curl -H "Accept: text/turtle" --location --request GET 'http://localhost:8080/algorithm/fuzzySearchWeightedRatioAlgorithm'`
+
+
+
 # Development Environment
 Currently there is one instance running, that is public available.  
 This is our [development instance](https://loa.test.opensourceecology.de/), that is provided by [Makers4Humanity](https://www.m4h.network/) & [Open Source Ecology ](https://opensourceecology.de/)
