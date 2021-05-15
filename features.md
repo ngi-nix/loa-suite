@@ -22,20 +22,10 @@ See also [merging-loa-organisations](https://linkedopenactors.gitlab.io/loa-spec
 * Turtle Details  
 `curl -H "Accept: text/turtle" --location --request GET 'http://localhost:8080/algorithm/fuzzySearchWeightedRatioAlgorithm'`
 
+# SPARQL
+* https://rdf.dev.osalliance.com/rdf4j-workbench/repositories/kvm_loa/query
+* https://rdf.dev.osalliance.com/rdf4j-workbench/repositories/weChange_loa/query
+
 # Production helper
 * [Health endpoint](https://loa.test.opensourceecology.de/actuator/health)
 * [Info endpoint](https://loa.test.opensourceecology.de/actuator/info)
-
-# Known Bugs
-* Broken Links
-The Links on the [HTML Overview](https://loa.test.opensourceecology.de/algorithms) are broken.   
-**Workarround** use the following links:
-
-    * [fuzzySearchTokenSortPartialRatioAlgorithm](https://loa.test.opensourceecology.de/algorithm/howTofuzzySearchTokenSortPartialRatioAlgorithm)
-    * [fuzzySearchTokenSortRatioAlgorithm](https://loa.test.opensourceecology.de/algorithm/howTofuzzySearchTokenSortRatioAlgorithm)
-    * [fuzzySearchTokenSetPartialRatioAlgorithm](https://loa.test.opensourceecology.de/algorithm/howTofuzzySearchTokenSetPartialRatioAlgorithm)
-    * [fuzzySearchWeightedRatioAlgorithm](https://loa.test.opensourceecology.de/algorithm/howTofuzzySearchWeightedRatioAlgorithm)
-    * [fuzzySearchTokenSetRatioAlgorithm](https://loa.test.opensourceecology.de/algorithm/howTofuzzySearchTokenSetRatioAlgorithm)
-    * [fuzzySearchPartialRatioAlgorithm](https://loa.test.opensourceecology.de/algorithm/howTofuzzySearchPartialRatioAlgorithm)
-    * [fuzzySearchRatioAlgorithm](https://loa.test.opensourceecology.de/algorithm/howTofuzzySearchRatioAlgorithm)
-    * [distanceCalculator](https://loa.test.opensourceecology.de/algorithm/howTodistanceCalculator)
