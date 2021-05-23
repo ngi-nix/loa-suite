@@ -51,11 +51,12 @@ public class LoaController {
 	private PublicationRepo publicationRepoWeCahnge;
 	
 	public LoaController(LoaRDF4JRepositoryManager rdf4jRepositoryManager,
-			@Qualifier("wolmanComperator") WolmanComperator wolmanComperator, List<LoaComparator> comparators,
+//			@Qualifier("wolmanComperator") WolmanComperator wolmanComperator, 
+			List<LoaComparator> comparators,
 			@Qualifier("KvmPublicationRepo") PublicationRepo publicationRepo,
 			@Qualifier("WeChangePublicationRepo") PublicationRepo publicationRepoWeCahnge) {
 		this.rdf4jRepositoryManager = rdf4jRepositoryManager;
-		this.wolmanComperator = wolmanComperator;
+//		this.wolmanComperator = wolmanComperator;
 		this.publicationRepo = publicationRepo;
 		this.publicationRepoWeCahnge = publicationRepoWeCahnge;
 	}
@@ -109,44 +110,44 @@ public class LoaController {
 		return "publication";
 	}
 
-	/**
-	 * Compare as descibed here: https://github.com/kartevonmorgen/openfairdb/issues/254#issue-575057485
-	 * @param publicationA
-	 * @param publicationB
-	 * @return
-	 */
-	@GetMapping(path = "/kvm/wolmanCompare", produces = { "text/turtle" })
-	public ResponseEntity<String> wolmanCompare(@RequestParam("publicationA") String publicationA, @RequestParam("publicationB") String publicationB) {
+//	/**
+//	 * Compare as descibed here: https://github.com/kartevonmorgen/openfairdb/issues/254#issue-575057485
+//	 * @param publicationA
+//	 * @param publicationB
+//	 * @return
+//	 */
+//	@GetMapping(path = "/kvm/wolmanCompare", produces = { "text/turtle" })
+//	public ResponseEntity<String> wolmanCompare(@RequestParam("publicationA") String publicationA, @RequestParam("publicationB") String publicationB) {
+//
+//		PublicationLoa pubA = getPublication(publicationA);
+//		PublicationLoa pubB = getPublication(publicationB);
+//
+//		org.eclipse.rdf4j.model.Model modelA = new ModelCreator<PublicationLoa>(pubA).toModel();
+//		org.eclipse.rdf4j.model.Model modelB = new ModelCreator<PublicationLoa>(pubB).toModel();
+//		
+//		List<ComparatorOutput> cos = wolmanComperator.compare(ComparatorInput.builder()
+//				.subjectA(modelA)
+//				.subjectB(modelB)
+//				.build());
+//		
+//		org.eclipse.rdf4j.model.Model allResults = new ModelBuilder().build(); 
+//		cos.forEach(it->{
+//			ModelCreator<ComparatorOutput> mc = new ModelCreator<>(it);
+//			allResults.addAll(mc.toModel(new SimpleNamespace("kvm", "http://test.de")));
+//		});
+//		
+//		StringWriter sw = new StringWriter();
+//		Rio.write(allResults, sw, RDFFormat.TURTLE);
+//		return new ResponseEntity<String>(sw.toString(), HttpStatus.OK);
+//	}
 
-		PublicationLoa pubA = getPublication(publicationA);
-		PublicationLoa pubB = getPublication(publicationB);
-
-		org.eclipse.rdf4j.model.Model modelA = new ModelCreator<PublicationLoa>(pubA).toModel();
-		org.eclipse.rdf4j.model.Model modelB = new ModelCreator<PublicationLoa>(pubB).toModel();
-		
-		List<ComparatorOutput> cos = wolmanComperator.compare(ComparatorInput.builder()
-				.subjectA(modelA)
-				.subjectB(modelB)
-				.build());
-		
-		org.eclipse.rdf4j.model.Model allResults = new ModelBuilder().build(); 
-		cos.forEach(it->{
-			ModelCreator<ComparatorOutput> mc = new ModelCreator<>(it);
-			allResults.addAll(mc.toModel(new SimpleNamespace("kvm", "http://test.de")));
-		});
-		
-		StringWriter sw = new StringWriter();
-		Rio.write(allResults, sw, RDFFormat.TURTLE);
-		return new ResponseEntity<String>(sw.toString(), HttpStatus.OK);
-	}
-
-	private org.eclipse.rdf4j.model.Model filterPublication(PublicationLoa pubA) {
-		org.eclipse.rdf4j.model.Model model = new ModelCreator<PublicationLoa>(pubA).toModel();
-		Iterable<Statement> statements = model.getStatements(null, RDF.TYPE, SCHEMA_ORG.CreativeWork);
-		IRI val = (IRI)statements.iterator().next().getSubject();
-		org.eclipse.rdf4j.model.Model modelPub = model.filter(val, null, null);
-		return modelPub;
-	}
+//	private org.eclipse.rdf4j.model.Model filterPublication(PublicationLoa pubA) {
+//		org.eclipse.rdf4j.model.Model model = new ModelCreator<PublicationLoa>(pubA).toModel();
+//		Iterable<Statement> statements = model.getStatements(null, RDF.TYPE, SCHEMA_ORG.CreativeWork);
+//		IRI val = (IRI)statements.iterator().next().getSubject();
+//		org.eclipse.rdf4j.model.Model modelPub = model.filter(val, null, null);
+//		return modelPub;
+//	}
 
 	private PublicationLoa getPublication(String publication) {
 //		PublicationRepo publicationRepo = rdf4jRepositoryManager.getKvmPublicationRepo();
@@ -182,6 +183,11 @@ public class LoaController {
 		return "publications";
 	}
 	
+	@GetMapping("/tempRepoFromCsv")
+	public String tempRepoFromCsv(Model model) {
+		return "tempRepoFromCsv";
+	}
+
 	private String query() {
 		return "PREFIX schema: <http://schema.org/> \n"
 				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"

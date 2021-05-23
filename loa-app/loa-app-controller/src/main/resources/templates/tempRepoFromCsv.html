@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>linked open actors (LOA) - create temp repository</title>
+<link rel="stylesheet" href="/publications.css">
+</head>
+<body>
+	<h1>Create a temporary loa repository</h1>
+
+	<section class="my-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 mx-auto">
+					<p>The repository will be deleted after a few (~6) hours !</p>
+					<p>Please upload the csv file that contains the loa objects, that should be in the new repository:</p>
+					<p th:text="${message}" th:if="${message ne null}"
+						class="alert alert-primary"></p>
+					<form method="post" th:action="@{/tools/createTempRepo}"
+						enctype="multipart/form-data">
+						<label for="fname">CSV File:</label>
+						<input type="file" name="file" class="form-control-file">
+						</br>
+						<button type="submit" class="btn btn-primary">Click to create repository</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<p>
+	<h2>The csv should heave the following headlines/columns:</h2>
+					PublicationLoa.version</br>
+					PublicationLoa.copyrightNotice</br>
+					PublicationLoa.creativeWorkStatus</br>
+					PublicationLoa.dateCreated</br>
+					PublicationLoa.dateModified</br>
+					PublicationLoa.license</br>
+					PublicationLoa.keywords</br>
+					PublicationLoa.identifier</br>
+					PublicationLoa.description</br>
+					OrgansationLoa.legalName</br>
+					OrgansationLoa.name</br>
+					OrgansationLoa.url</br>
+					PlaceLoa.latitude</br>
+					PlaceLoa.longitude</br>
+					PostalAddressLoa.postalCode</br>
+					PostalAddressLoa.addressLocality</br>
+					PostalAddressLoa.addressRegion</br>
+					PostalAddressLoa.addressCountry</br>
+					PostalAddressLoa.streetAddress</br>
+					ContactPointLoa.email</br>
+					ContactPointLoa.name</br>
+					ContactPointLoa.telephone</br>
+		</p>			
+</body>
+</html>

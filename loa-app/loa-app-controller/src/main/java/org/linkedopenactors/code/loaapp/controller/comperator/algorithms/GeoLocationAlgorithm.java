@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import de.naturzukunft.rdf4j.loarepository.PlaceLoa;
 import lombok.NoArgsConstructor;
 
-@Component
+//@Component
 @NoArgsConstructor
 public class GeoLocationAlgorithm implements Algorithm {
     
