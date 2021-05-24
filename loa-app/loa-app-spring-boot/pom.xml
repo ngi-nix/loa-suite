@@ -27,7 +27,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.linkedopenactors.code</groupId>
-			<artifactId>CSVImporter</artifactId>
+			<artifactId>loa-csv-adapter</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

@@ -11,5 +11,6 @@
   <modules>
   	<module>loa-kvm-adapter</module>
   	<module>loa-wechange-adapter</module>
+  	<module>loa-csv-adapter</module>
   </modules>
 </project>
