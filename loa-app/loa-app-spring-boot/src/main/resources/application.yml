@@ -3,7 +3,7 @@ server:
 logging:
   level:
     root: WARN
-    org.springframework.web: INFO    
+    org.springframework.web: DEBUG    
     org.linkedopenactors: INFO
     org.linkedopenactors.code.kvmadapter: INFO
     de.naturzukunft.rdf4j.loarepository: INFO
@@ -22,6 +22,7 @@ management:
 app:
 #  baseNamespace: http://localhost:8080/
   baseNamespace: https://loa.test.opensourceecology.de/
+  baseSubjectSystem: https://loa.test.opensourceecology.de/system/
   searchForChangesInTheLastMinutes: 180
   kvmUrl: https://api.ofdb.io/v0/
   baseSubjectKvm: http://linkedopenactors.org/kvm/

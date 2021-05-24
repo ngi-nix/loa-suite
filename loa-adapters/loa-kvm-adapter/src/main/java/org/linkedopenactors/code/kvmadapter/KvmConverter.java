@@ -94,6 +94,7 @@ public class KvmConverter {
 		.version(version);
 
 		if(entry.getTags()!=null) {
+			// TODO hier sollte kein csv stehen, sondern mehrere einträge!
 			publicationLoaBuilder.keywords(entry.getTags().stream()
                     .collect(Collectors.joining(",")));
 		}

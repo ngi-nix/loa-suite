@@ -13,7 +13,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 		"org.linkedopenactors.code.kvmadapter",
 		"org.linkedopenactors.code", 
 		"org.linkedopenactors.code.distancecalculator", 
-		"org.linkedopenactors.code.loaAlgorithm"})
+		"org.linkedopenactors.code.loaAlgorithm",
+		"de.naturzukunft.rdf4j.loarepository"})
 public class LoaAppApplication {
 
 	public static void main(String[] args) {

@@ -38,10 +38,10 @@ class TestLoaController {
 //	}
 
 //	@Test
-	void testWolman() {
-		ResponseEntity<String> res = loaController.wolmanCompare("a91dc4751c324b03ac7f4b8111429465", "4a28e38695854059a457beb3b53c2578");
-//		System.out.println(res.getBody());
-	}
+//	void testWolman() {
+//		ResponseEntity<String> res = loaController.wolmanCompare("a91dc4751c324b03ac7f4b8111429465", "4a28e38695854059a457beb3b53c2578");
+////		System.out.println(res.getBody());
+//	}
 
 	
 //	@Test
