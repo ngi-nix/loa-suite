@@ -74,8 +74,11 @@ public class CsvImporter {
 							throw new RuntimeException(e);
 						}
 					}).next();
-			Mono<String> repositoryId = path.map(it->importCsvInternal(it));
-			return ServerResponse.ok().body(repositoryId, String.class);
+		 
+			Mono<String> repositoryUrl = path.map(it->importCsvInternal(it)).map(repositoryId->String.format("The reopository with the id '%s' was created. \n"
+					+ "Access it via rdf4j-workbench: https://rdf.dev.osalliance.com/rdf4j-workbench/repositories/%s/summary \n"
+		 			+ "or as SPARQL endpoint: %s/%s/query", repositoryId, repositoryId, RDF4J_SERVER, repositoryId));
+			return ServerResponse.ok().body(repositoryUrl, String.class);
 	}
 	
 	public String importCsvInternal(FileData fileData) {
