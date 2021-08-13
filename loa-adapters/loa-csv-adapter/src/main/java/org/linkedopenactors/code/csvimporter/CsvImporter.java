@@ -9,7 +9,6 @@ import java.io.PipedOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -20,7 +19,6 @@ import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.util.Values;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
-import org.eclipse.rdf4j.repository.manager.RemoteRepositoryManager;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.HttpStatus;
@@ -50,15 +48,11 @@ import reactor.core.publisher.Mono;
 @Component
 public class CsvImporter {
 
-	private static final String RDF4J_SERVER = "https://rdf.dev.osalliance.com/rdf4j-server";
 	private String namespace = "http://loa.xy/";
-	private RemoteRepositoryManager manager; 
 	private SystemRepository systemrepository;
 	
 	public CsvImporter(SystemRepository systemrepository) {
 		this.systemrepository = systemrepository;
-		manager = new RemoteRepositoryManager(RDF4J_SERVER);
-		manager.init();		
 	}
 	
 	public Mono<ServerResponse> importCsv(ServerRequest request) {
@@ -76,8 +70,8 @@ public class CsvImporter {
 					}).next();
 		 
 			Mono<String> repositoryUrl = path.map(it->importCsvInternal(it)).map(repositoryId->String.format("The reopository with the id '%s' was created. \n"
-					+ "Access it via rdf4j-workbench: https://rdf.dev.osalliance.com/rdf4j-workbench/repositories/%s/summary \n"
-		 			+ "or as SPARQL endpoint: %s/%s/query", repositoryId, repositoryId, RDF4J_SERVER, repositoryId));
+					+ "Access it via TODO TODO TODO rdf4j-workbench: https://rdf.dev.osalliance.com/rdf4j-workbench/repositories/%s/summary \n"
+		 			+ "or as SPARQL endpoint: %s/%s/query", repositoryId, repositoryId, "RDF4J_SERVER", repositoryId));
 			return ServerResponse.ok().body(repositoryUrl, String.class);
 	}
 	

@@ -14,7 +14,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 		"org.linkedopenactors.code", 
 		"org.linkedopenactors.code.distancecalculator", 
 		"org.linkedopenactors.code.loaAlgorithm",
-		"de.naturzukunft.rdf4j.loarepository"})
+		"de.naturzukunft.rdf4j.loarepository",
+		"org.linkedopenactors.code.loaapp.config"})
 public class LoaAppApplication {
 
 	public static void main(String[] args) {
