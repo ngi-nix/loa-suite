@@ -1,2 +1,5 @@
 app:
   rdfRepositoryHome: /mnt/spring
+spring:
+  boot.admin.client.url: http://loa-admin-server:9090
+  
