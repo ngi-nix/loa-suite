@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.linkedopenactors.code</groupId>
 		<artifactId>loa-adapters</artifactId>
-		<version>0.0.7-SNAPSHOT</version>
+		<version>0.0.7-replace_rdf4jserver-SNAPSHOT</version>
 	</parent>
 	<artifactId>loa-wechange-adapter</artifactId>
 	<name>${project.parent.artifactId}.${project.artifactId}</name>
