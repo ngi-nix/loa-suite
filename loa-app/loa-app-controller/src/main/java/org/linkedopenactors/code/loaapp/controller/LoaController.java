@@ -35,10 +35,12 @@ import de.naturzukunft.rdf4j.loarepository.LastSyncDateStore;
 import de.naturzukunft.rdf4j.loarepository.PublicationLoa;
 import de.naturzukunft.rdf4j.loarepository.PublicationRepo;
 import de.naturzukunft.rdf4j.ommapper.ModelCreator;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
+@Tag(name = "LoaController", description = "Everything that did not has it's own place yet.")
 public class LoaController {
 	
 	private Repository kvmRepository;
@@ -68,13 +70,6 @@ public class LoaController {
 		return actorsRepository;
 	}
 		
-	@GetMapping(path = "/comparators", produces = { "text/html" })
-	public String getComparators(Model model) {
-		List<Binding> bindings = new ArrayList<>();
-		model.addAttribute("bindings", bindings);
-		return "algorithms";
-	}
-
 	@GetMapping(path = "/lastSync", produces = { "text/html" })
 	public String getLastSync(Model model) {
 		IRI kvm = Values.iri("http://linkedopenactors.org/adapters/kvm");
@@ -116,53 +111,12 @@ public class LoaController {
 		return "publication";
 	}
 
-//	/**
-//	 * Compare as descibed here: https://github.com/kartevonmorgen/openfairdb/issues/254#issue-575057485
-//	 * @param publicationA
-//	 * @param publicationB
-//	 * @return
-//	 */
-//	@GetMapping(path = "/kvm/wolmanCompare", produces = { "text/turtle" })
-//	public ResponseEntity<String> wolmanCompare(@RequestParam("publicationA") String publicationA, @RequestParam("publicationB") String publicationB) {
-//
-//		PublicationLoa pubA = getPublication(publicationA);
-//		PublicationLoa pubB = getPublication(publicationB);
-//
-//		org.eclipse.rdf4j.model.Model modelA = new ModelCreator<PublicationLoa>(pubA).toModel();
-//		org.eclipse.rdf4j.model.Model modelB = new ModelCreator<PublicationLoa>(pubB).toModel();
-//		
-//		List<ComparatorOutput> cos = wolmanComperator.compare(ComparatorInput.builder()
-//				.subjectA(modelA)
-//				.subjectB(modelB)
-//				.build());
-//		
-//		org.eclipse.rdf4j.model.Model allResults = new ModelBuilder().build(); 
-//		cos.forEach(it->{
-//			ModelCreator<ComparatorOutput> mc = new ModelCreator<>(it);
-//			allResults.addAll(mc.toModel(new SimpleNamespace("kvm", "http://test.de")));
-//		});
-//		
-//		StringWriter sw = new StringWriter();
-//		Rio.write(allResults, sw, RDFFormat.TURTLE);
-//		return new ResponseEntity<String>(sw.toString(), HttpStatus.OK);
-//	}
-
-//	private org.eclipse.rdf4j.model.Model filterPublication(PublicationLoa pubA) {
-//		org.eclipse.rdf4j.model.Model model = new ModelCreator<PublicationLoa>(pubA).toModel();
-//		Iterable<Statement> statements = model.getStatements(null, RDF.TYPE, SCHEMA_ORG.CreativeWork);
-//		IRI val = (IRI)statements.iterator().next().getSubject();
-//		org.eclipse.rdf4j.model.Model modelPub = model.filter(val, null, null);
-//		return modelPub;
-//	}
-
 	private PublicationLoa getPublication(String publication) {
-//		PublicationRepo publicationRepo = rdf4jRepositoryManager.getKvmPublicationRepo();
 		log.info("reading publication: " + publication);
 		List<PublicationLoa> publications = publicationRepo.getByIdentifier(publication);
 		
 		// TODO search the newest
 		
-//		String identifier = publications.stream().findFirst().map(it->it.getAbout().getName()).orElse("notFound");
 		log.info("extracting the first publication from : " + publications.size());
 		PublicationLoa pub = publications.stream().findFirst().orElseThrow(()->new RuntimeException("not found"));
 		return pub;
@@ -217,5 +171,4 @@ public class LoaController {
 		Rio.write(model, sw, rdfFormat);		
 		return sw.toString();
 	}
-	
 }

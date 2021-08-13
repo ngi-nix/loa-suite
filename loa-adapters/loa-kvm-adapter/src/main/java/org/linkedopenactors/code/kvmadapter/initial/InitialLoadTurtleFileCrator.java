@@ -237,13 +237,12 @@ public class InitialLoadTurtleFileCrator {
 		.retrieve()
 		.bodyToFlux(String.class);		
 		
-		System.out.println("response: " + response.collectList().block());
+		log.info("response: " + response.collectList().block());
 	}
 
 	private ExchangeFilterFunction logResponse() {
-		System.out.println(log.isDebugEnabled());
 		return ExchangeFilterFunction.ofResponseProcessor(clientRequest -> {
-			System.out.println("#################");
+			log.info("#################");
 	        if (log.isDebugEnabled()) {
 	            StringBuilder sb = new StringBuilder("Request: \n");
 	            //append clientRequest method and url

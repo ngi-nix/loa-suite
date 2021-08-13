@@ -16,7 +16,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @Controller
+@Tag(name = "AlgorithmController", description = "Provide informations about the available algorithms.")
 public class AlgorithmController {
 	
 	private Map<String, LoaAlgorithm<?>> availableAlgorythms;
@@ -64,21 +67,6 @@ public class AlgorithmController {
 		}	
 	}
 
-//	@GetMapping(path = "/algorithm/{name}", produces = { "text/html" })
-//	public String getAlgorithm(@PathVariable String name, Model model) {
-//		if(availableAlgorythms.containsKey(name)) {
-//			LoaAlgorithm<?> algorithm = availableAlgorythms.get(name);
-//			
-//			model.addAttribute("algorithm", AlgorithmsItem.builder()
-//													.name(algorithm.getName())
-//													.description(algorithm.getDescription())
-//													.build());
-//			return name;
-//		} else {
-//			throw new RuntimeException(name + " unknown");
-//		}	
-//	}
-	
 	@GetMapping(path = "/algorithm/{name}", produces = { "text/turtle" })
 	public ResponseEntity<String> getAlgorithmTurtle(@PathVariable String name, Model model) {
 		LoaAlgorithm<?> algorithm = availableAlgorythms.get(name);
@@ -90,5 +78,4 @@ public class AlgorithmController {
 		Rio.write(m, sw, RDFFormat.TURTLE);
 		return new ResponseEntity<String>(sw.toString(), HttpStatus.OK);
 	}
-	
 }

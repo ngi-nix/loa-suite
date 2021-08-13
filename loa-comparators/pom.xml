@@ -1,0 +1,15 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.linkedopenactors.code</groupId>
+    <artifactId>loa-suite</artifactId>
+    <version>0.0.7-addSimilarityCheck-SNAPSHOT</version>
+  </parent>
+  <artifactId>loa-comparators</artifactId>
+  <packaging>pom</packaging>
+  <modules>
+  	<module>loa-comparator-geo-coordinates</module>
+  	<module>loa-comparator</module>
+  	<module>loa-similarity-checker-hackathon2021</module>
+  </modules>
+</project>
