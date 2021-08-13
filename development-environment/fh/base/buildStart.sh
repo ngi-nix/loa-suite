@@ -5,7 +5,7 @@ sudo docker stop $(sudo docker ps -aq)
 docker rmi $(docker images -f "dangling=true" -q) --force
 
 export SLR_BUILD_HOME=`pwd`
-export WORKSPACE=/home/fredy/ws/loa-suite-ws
+export WORKSPACE=/home/fredy/ws/loa2
 
 . ../buildLoaApp.sh
 

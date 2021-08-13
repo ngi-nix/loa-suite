@@ -20,7 +20,7 @@ services:
       - "9090:9090"
   loa-app:      
 #    image: loa-app-spring-boot:latest  
-    image: registry.gitlab.com/linkedopenactors/loa-suite:feature-keywords-csvimport    
+    image: registry.gitlab.com/linkedopenactors/loa-suite:develop    
     environment:
       - SPRING_PROFILES_ACTIVE=dockercompose
     volumes:
