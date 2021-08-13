@@ -1,6 +1,10 @@
 server:
   port: 8090
+spring:
+  application.name: loa-app
+  boot.admin.client.url: http://localhost:9090
 logging:
+  file.name: "logs/client.log"
   level:
     root: WARN
     org.springframework.web: DEBUG    
@@ -19,6 +23,13 @@ management:
       show-details: always
     info:
       enabled: true
+springdoc:
+    swagger-ui:
+        oauth:
+            token-url: http://localhost:8080/auth/realms/LOA/protocol/openid-connect/token
+            clientId: loa
+            clientSecret: loa
+    writer-with-default-pretty-printer: true
 app:
 #  rdfRepositoryHome: /mnt/spring
   rdfRepositoryHome: target/repoManager
