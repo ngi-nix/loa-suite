@@ -4,7 +4,7 @@ spring:
   application.name: loa-app
   boot.admin.client.url: http://localhost:9090
 logging:
-  file.name: "logs/client.log"
+  file.path: target/logs
   level:
     root: WARN
     org.springframework.web: DEBUG    

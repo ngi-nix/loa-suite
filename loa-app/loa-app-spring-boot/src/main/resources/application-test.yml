@@ -3,5 +3,5 @@ app:
 logging:
   file.name: /mnt/spring/logs/client.log  
 spring:
-  boot.admin.client.url: http://loa-admin-server:9090
+  boot.admin.client.url: https://loa-spring-boot-admin.test.opensourceecology.de
   
