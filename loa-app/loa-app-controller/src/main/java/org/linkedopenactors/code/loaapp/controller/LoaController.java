@@ -6,62 +6,68 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.rdf4j.model.IRI;
-import org.eclipse.rdf4j.model.Statement;
-import org.eclipse.rdf4j.model.impl.SimpleNamespace;
-import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.util.Values;
-import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.query.BindingSet;
 import org.eclipse.rdf4j.query.TupleQuery;
 import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
+import org.eclipse.rdf4j.repository.config.RepositoryConfig;
+import org.eclipse.rdf4j.repository.config.RepositoryImplConfig;
+import org.eclipse.rdf4j.repository.manager.RepositoryManager;
+import org.eclipse.rdf4j.repository.sail.config.SailRepositoryConfig;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
-import org.linkedopenactors.code.loaapp.controller.comperator.ComparatorInput;
-import org.linkedopenactors.code.loaapp.controller.comperator.ComparatorOutput;
+import org.eclipse.rdf4j.sail.nativerdf.config.NativeStoreConfig;
 import org.linkedopenactors.code.loaapp.controller.comperator.LoaComparator;
-import org.linkedopenactors.code.loaapp.controller.comperator.WolmanComperator;
-import org.linkedopenactors.code.loaapp.controller.infrastructure.config.LoaRDF4JRepositoryManager;
 import org.linkedopenactors.code.loaapp.controller.ui.model.Binding;
 import org.linkedopenactors.code.loaapp.controller.ui.model.LastSyncModel;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import de.naturzukunft.rdf4j.loarepository.LastSyncDateStore;
 import de.naturzukunft.rdf4j.loarepository.PublicationLoa;
 import de.naturzukunft.rdf4j.loarepository.PublicationRepo;
 import de.naturzukunft.rdf4j.ommapper.ModelCreator;
-import de.naturzukunft.rdf4j.vocabulary.SCHEMA_ORG;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
 public class LoaController {
 	
-	private LoaRDF4JRepositoryManager rdf4jRepositoryManager;
-	private WolmanComperator wolmanComperator;
+	private Repository kvmRepository;
 	private PublicationRepo publicationRepo;
 	private PublicationRepo publicationRepoWeCahnge;
 	
-	public LoaController(LoaRDF4JRepositoryManager rdf4jRepositoryManager,
-//			@Qualifier("wolmanComperator") WolmanComperator wolmanComperator, 
+	public LoaController(RepositoryManager kvmRepositoryManager,
 			List<LoaComparator> comparators,
 			@Qualifier("KvmPublicationRepo") PublicationRepo publicationRepo,
-			@Qualifier("WeChangePublicationRepo") PublicationRepo publicationRepoWeCahnge) {
-		this.rdf4jRepositoryManager = rdf4jRepositoryManager;
-//		this.wolmanComperator = wolmanComperator;
+			@Qualifier("WeChangePublicationRepo") PublicationRepo publicationRepoWeCahnge,
+			@Value("${app.repositoryIdKvm}") String kvmRepositoryID) {
 		this.publicationRepo = publicationRepo;
 		this.publicationRepoWeCahnge = publicationRepoWeCahnge;
+		this.kvmRepository = getKvmRepo(kvmRepositoryManager, kvmRepositoryID);
 	}
 
-
+	private Repository getKvmRepo(RepositoryManager repositoryManager, String kvmRepositoryID) {
+		Repository actorsRepository;
+		actorsRepository = repositoryManager.getRepository(kvmRepositoryID);
+		if (actorsRepository == null) {
+			RepositoryImplConfig repositoryTypeSpec = new SailRepositoryConfig(new NativeStoreConfig());
+			RepositoryConfig repConfig = new RepositoryConfig(kvmRepositoryID, repositoryTypeSpec);
+			repositoryManager.addRepositoryConfig(repConfig);
+			actorsRepository = repositoryManager.getRepository(kvmRepositoryID);
+			return actorsRepository;
+		}
+		return actorsRepository;
+	}
+		
 	@GetMapping(path = "/comparators", produces = { "text/html" })
 	public String getComparators(Model model) {
 		List<Binding> bindings = new ArrayList<>();
@@ -164,9 +170,8 @@ public class LoaController {
 
 	@GetMapping("/publications")
 	public String getAll(Model model) {
-		Repository repository = rdf4jRepositoryManager.getKvmRepo();
 		List<Binding> bindings = new ArrayList<>();
-		try(RepositoryConnection con = repository.getConnection()) {
+		try(RepositoryConnection con = kvmRepository.getConnection()) {
 			TupleQuery tupleQuery = con.prepareTupleQuery(query());
 			   try (TupleQueryResult result = tupleQuery.evaluate()) {//				   
 			      while (result.hasNext()) {  // iterate over the result

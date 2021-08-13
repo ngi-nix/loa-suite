@@ -19,7 +19,7 @@ import de.naturzukunft.rdf4j.loarepository.PublicationRepo;
 import de.naturzukunft.rdf4j.ommapper.Converter;
 
 @Configuration
-public class RDF4JRepositoryManager {
+public class KvmRDF4JRepositoryManager {
 	
 	@Value("${app.rdf4jServer}")
 	private String rdf4jServer;

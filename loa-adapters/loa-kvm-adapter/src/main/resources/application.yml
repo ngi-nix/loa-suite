@@ -13,5 +13,4 @@ app:
   searchForChangesInTheLastMinutes: 180
   kvmUrl: https://api.ofdb.io/v0/
   baseSubjectKvm: http://linkedopenactors.org/kvm/
-  rdf4jServer: https://rdf.dev.osalliance.com/rdf4j-server/
   repositoryIdKvm: kvm  

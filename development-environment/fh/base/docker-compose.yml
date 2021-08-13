@@ -1,0 +1,33 @@
+version: '2.2'
+services:
+  keycloak:
+    image: jboss/keycloak:12.0.3
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+    ports:
+      - 8080:8080
+      - 8443:8443
+      - 9990:9990
+  mailhog.mailhog:
+    image: mailhog/mailhog:latest    
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+  loa-admin-server:
+    image: registry.gitlab.com/linkedopenactors/loa-admin-server:latest
+    ports:
+      - "9090:9090"
+  loa-app:      
+#    image: loa-app-spring-boot:latest  
+    image: registry.gitlab.com/linkedopenactors/loa-suite:feature-keywords-csvimport    
+    environment:
+      - SPRING_PROFILES_ACTIVE=dockercompose
+    volumes:
+      - /home/fredy/tmp/rdf4jRepos:/mnt/spring
+    ports:
+      - "8090:8090"
+volumes:
+  rdf4jRepos:
+    external: true
+      
