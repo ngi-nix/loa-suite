@@ -1,7 +1,11 @@
 app:
   rdfRepositoryHome: /mnt/spring
 logging:
-  file.name: /mnt/spring/logs/client.log  
+  file: 
+    name: /mnt/spring/logs/client.log
+management:
+  endpoint:
+    logfile.external-file: /mnt/spring/logs/client.log
 spring:
   boot.admin.client.url: http://loa-admin-server:9090
   

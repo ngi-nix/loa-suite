@@ -4,7 +4,8 @@ spring:
   application.name: loa-app
   boot.admin.client.url: http://localhost:9090
 logging:
-  file.path: target/logs
+  file: 
+    name: target/logs/client.log
   level:
     root: WARN
     org.springframework.web: DEBUG    
@@ -17,12 +18,18 @@ logging:
 management:
   endpoints:
     enabled-by-default: false
+    web.exposure.include: "*"
   endpoint:
     health:
       enabled: true
       show-details: always
     info:
       enabled: true
+    loggers:
+      enabled: true
+    logfile:
+      enabled: true
+      external-file: target/logs/client.log      
 springdoc:
     swagger-ui:
         oauth:
