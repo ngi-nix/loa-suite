@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.linkedopenactors.code</groupId>
 		<artifactId>loa-algorithms</artifactId>
-		<version>0.0.7-renamingAndReorganising-SNAPSHOT</version>
+		<version>0.0.7-SNAPSHOT</version>
 	</parent>
 	<artifactId>loa-algorithm-fuzzySearch</artifactId>
 	<name>loa-suite.${project.parent.artifactId}.${project.artifactId}</name>
