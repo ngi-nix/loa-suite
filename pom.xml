@@ -19,7 +19,7 @@
 		<module>loa-adapters</module>
 		<module>loa-app</module>
 		<module>loa-comparators</module>
-		<module>loa-similarity-checker</module>
+		<module>loa-similarity-checkers</module>
 	</modules>
 	<properties>
 		<rdf4jtools.version>0.0.10</rdf4jtools.version>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
@@ -8,9 +7,14 @@
 		<artifactId>loa-algorithms</artifactId>
 		<version>0.0.7-SNAPSHOT</version>
 	</parent>
-	<artifactId>loa-algorithm</artifactId>
+	<artifactId>loa-algorithm-distanceCalculator</artifactId>
 	<name>loa-suite.${project.parent.artifactId}.${project.artifactId}</name>
-	<dependencies>
+	<dependencies>	
+		<dependency>
+			<groupId>org.linkedopenactors.code</groupId>
+			<artifactId>loa-algorithm</artifactId>
+    		<version>${project.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>de.naturzukunft.rdf4j</groupId>
 			<artifactId>om-mapper</artifactId>
@@ -21,12 +25,18 @@
 			<version>1.5.10</version>
 		</dependency>
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 </project>
+

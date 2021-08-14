@@ -5,11 +5,11 @@
     <artifactId>loa-suite</artifactId>
     <version>0.0.7-SNAPSHOT</version>
   </parent>
-  <artifactId>loa-comparators</artifactId>
+  <artifactId>loa-similarity-checkers</artifactId>
   <name>${project.parent.artifactId}.${project.artifactId}</name>
   <packaging>pom</packaging>
   <modules>
-  	<module>loa-comparator-geo-coordinates</module>
-  	<module>loa-comparator</module>
+  	<module>loa-similarity-checker</module>
+  	<module>loa-similarity-checker-hackathon2021</module>
   </modules>
 </project>

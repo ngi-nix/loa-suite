@@ -12,8 +12,8 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>loa-algorithm</module>
-		<module>loa-distanceCalculator</module>
-		<module>loa-fuzzySearchAlgorithms</module>
+		<module>loa-algorithm-distanceCalculator</module>
+		<module>loa-algorithm-fuzzySearch</module>
 	</modules>
 </project>
 

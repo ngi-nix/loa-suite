@@ -8,7 +8,7 @@
 		<version>0.0.7-SNAPSHOT</version>
 	</parent>
 	<artifactId>loa-app-spring-boot</artifactId>
-	<name>${project.parent.artifactId}.${project.artifactId}</name>
+	<name>loa-suite.${project.parent.artifactId}.${project.artifactId}</name>
 	<properties>
 		<spring-boot-admin.version>2.4.3</spring-boot-admin.version>
 	</properties>

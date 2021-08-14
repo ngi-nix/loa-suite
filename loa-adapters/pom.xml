@@ -9,9 +9,9 @@
   <name>${project.parent.artifactId}.${project.artifactId}</name>
   <packaging>pom</packaging>
   <modules>
-  	<module>loa-kvm-adapter</module>
-  	<module>loa-wechange-adapter</module>
-  	<module>loa-csv-adapter</module>
-  	<module>loa-osm-adapter</module>
+  	<module>loa-adapter-kvm</module>
+  	<module>loa-adapter-wechange</module>
+  	<module>loa-adapter-csv</module>
+  	<module>loa-adapter-osm</module>
   </modules>
 </project>
