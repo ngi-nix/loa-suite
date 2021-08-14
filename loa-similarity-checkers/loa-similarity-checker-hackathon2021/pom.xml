@@ -7,23 +7,18 @@
 		<artifactId>loa-comparators</artifactId>
 		<version>0.0.7-renamingAndReorganising-SNAPSHOT</version>
 	</parent>
-	<artifactId>loa-comparator-geo-coordinates</artifactId>
 	<name>loa-suite.${project.parent.artifactId}.${project.artifactId}</name>
+	<artifactId>loa-similarity-checker-hackathon2021</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>loa-comparator</artifactId>
+			<artifactId>loa-similarity-checker</artifactId>
 			<version>${project.version}</version>
-		</dependency>
+		</dependency>		
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>loa-distanceCalculator</artifactId>
+			<artifactId>loa-comparator-geo-coordinates</artifactId>
 			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-collections4</artifactId>
-			<version>4.4</version>
 		</dependency>
 	</dependencies>
 </project>
