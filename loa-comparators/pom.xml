@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.linkedopenactors.code</groupId>
     <artifactId>loa-suite</artifactId>
-    <version>0.0.7-SNAPSHOT</version>
+    <version>0.0.7-renamingAndReorganising-SNAPSHOT</version>
   </parent>
   <artifactId>loa-comparators</artifactId>
   <packaging>pom</packaging>
