@@ -30,6 +30,16 @@
 		</dependency>
 		<dependency>
 			<groupId>org.linkedopenactors.code</groupId>
+			<artifactId>loa-osm-adapter</artifactId>
+			<version>${project.version}</version>
+		</dependency>		
+		<dependency>
+			<groupId>org.linkedopenactors.code</groupId>
+			<artifactId>loa-similarity-checker-hackathon2021</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.linkedopenactors.code</groupId>
 			<artifactId>loa-csv-adapter</artifactId>
 			<version>${project.version}</version>
 		</dependency>

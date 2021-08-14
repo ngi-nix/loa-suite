@@ -16,6 +16,11 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.linkedopenactors.code</groupId>
+			<artifactId>loa-similarity-checker</artifactId>
+			<version>${project.version}</version>
+		</dependency>		
+		<dependency>
 			<groupId>de.naturzukunft.rdf4j</groupId>
 			<artifactId>activitystreams</artifactId>
 		</dependency>

@@ -8,11 +8,11 @@ logging:
     name: target/logs/client.log
   level:
     root: WARN
-    org.springframework.web: DEBUG    
-    org.linkedopenactors: INFO
-    org.linkedopenactors.code.kvmadapter: INFO
-    de.naturzukunft.rdf4j.loarepository: INFO
-    de.naturzukunft.rdf4j.loarepository.BaseObjectRepository: TRACE    
+    org.springframework.web: INFO    
+    org.linkedopenactors: TRACE
+#    org.linkedopenactors.code.kvmadapter: INFO
+#    de.naturzukunft.rdf4j.loarepository: INFO
+#    de.naturzukunft.rdf4j.loarepository.BaseObjectRepository: DEBUG    
     de.naturzukunft: INFO
     org.eclipse.rdf4j: WARN    
 management:
@@ -47,5 +47,8 @@ app:
   kvmUrl: https://api.ofdb.io/v0/
   baseSubjectKvm: http://linkedopenactors.org/kvm/
   rdf4jServer: https://rdf.dev.osalliance.com/rdf4j-server/
+  osmUrl: https://overpass.kumi.systems/api/interpreter/?data=[out:json][timeout:180]
+  osmFilter: '[~"^(organic|diet:vegan|diet:vegetarian|fair_trade|regional|second_hand|charity|ngo|identity)$"~"^([^nN].*|[nN][^oO].*|[nN][oO]. )$"];out qt;'
+  repositoryIdOsm: osm_loa
   repositoryIdKvm: kvm_loa  
   repositoryIdWeChange: weChange_loa

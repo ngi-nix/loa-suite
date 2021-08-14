@@ -8,7 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @Controller
+@Tag(name = "AlgorithmFuzzyFuzzy", description = "Some algorithms based on JavaWuzzy: https://github.com/xdrop/fuzzywuzzy")
 public class FuzzyFuzzyController {
 	
 	private FuzzySearchRatioAlgorithm fuzzySearchRatioAlgorithm;

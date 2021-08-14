@@ -19,6 +19,11 @@
 			<groupId>de.naturzukunft.rdf4j</groupId>
 			<artifactId>om-mapper</artifactId>
 		</dependency>
+		<dependency>	
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-webmvc-core</artifactId>
+			<version>1.5.10</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>

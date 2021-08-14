@@ -44,4 +44,14 @@ public class KVMRestEndpoint {
 		List<KvmEntry> entries = response.collectList().block();		
 		return entries;
 	}
+	
+	public Flux<KvmEntry> findByBoundingBox(Double latleftTop, Double lngleftTop, Double latRightBottom,
+			Double lngRightBottom) {
+
+		String url = kvmUrl + "search?bbox="+latleftTop+","+lngleftTop+","+latRightBottom+","+lngRightBottom+"&status=created,confirmed";
+		System.out.println("kvmUrl: " + url);
+
+		return webClient.get().uri(url).retrieve().bodyToFlux(KvmSearchResult.class).flatMap(result->Flux.fromIterable(result.getVisible()));
+	}
+	
 }
