@@ -17,12 +17,12 @@
 		</dependency>
 		<dependency>
 			<groupId>org.linkedopenactors.code</groupId>
-			<artifactId>loa-distanceCalculator</artifactId>
+			<artifactId>loa-algorithm-distanceCalculator</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.linkedopenactors.code</groupId>
-			<artifactId>loa-fuzzySearchAlgorithms</artifactId>
+			<artifactId>loa-algorithm-distanceCalculator</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
@@ -33,6 +33,11 @@
 		<dependency>		
 			<groupId>org.linkedopenactors.code</groupId>
 			<artifactId>loa-similarity-checker</artifactId>
+			<version>${project.version}</version>
+		</dependency>		
+		<dependency>		
+			<groupId>org.linkedopenactors.code</groupId>
+			<artifactId>loa-adapter-kvm</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

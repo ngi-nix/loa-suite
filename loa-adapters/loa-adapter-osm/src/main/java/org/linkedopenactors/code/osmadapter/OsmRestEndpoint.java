@@ -3,16 +3,13 @@ package org.linkedopenactors.code.osmadapter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import org.eclipse.jetty.util.log.Log;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 
 @Component
-@Slf4j
 public class OsmRestEndpoint {
 
 	@Value("${app.osmUrl}")

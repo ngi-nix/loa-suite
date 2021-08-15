@@ -6,30 +6,19 @@ import org.eclipse.rdf4j.query.TupleQuery;
 import org.eclipse.rdf4j.query.TupleQueryResult;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
-import org.junit.jupiter.api.Test;
-import org.linkedopenactors.code.loaapp.controller.LoaController;
 import org.linkedopenactors.code.loaapp.controller.infrastructure.config.LoaRDF4JRepositoryManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.ResponseEntity;
 
 @SpringBootTest
 class TestLoaController {
 	
-	@Autowired
-	private LoaController loaController;
+//	@Autowired
+//	private LoaController loaController;
 	
 	@Autowired
 	private LoaRDF4JRepositoryManager rdf4JRepositoryManager; 
 	
-//	@Test
-	void testRead() {
-//		ResponseEntity<String> res = toTest.getPublicationTurtle("localhost:8080/kvm/4a28e38695854059a457beb3b53c2578", null);
-//		ResponseEntity<String> res = toTest.getPublicationTurtle("localhost:8080/kvm/72cef4dc7481445b95de7f9d40433710", null);
-		ResponseEntity<String> res = loaController.getPublicationTurtle("a91dc4751c324b03ac7f4b8111429465", null);
-
-		System.out.println(res.getBody());
-	}
 	
 //	@Test
 //	void test() {

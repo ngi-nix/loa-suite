@@ -9,7 +9,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import de.naturzukunft.rdf4j.loarepository.LastSyncDateStore;
-import de.naturzukunft.rdf4j.loarepository.PublicationRepo;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -17,12 +16,12 @@ import lombok.extern.slf4j.Slf4j;
 public class KvmScheduler {
 
 	private static final IRI SUBJECT = Values.iri("http://linkedopenactors.org/adapters/kvm");
-	private KvmAdapter updateChangedKvmEntries; 	
+	private KvmSync updateChangedKvmEntries; 	
 	private LastSyncDateStore lastSyncDateStore;
 	
-	public KvmScheduler(KvmAdapter updateChangedKvmEntries, @Qualifier("KvmPublicationRepo") PublicationRepo publicationRepo) {
-		this.updateChangedKvmEntries = updateChangedKvmEntries;
-		lastSyncDateStore = publicationRepo;
+	public KvmScheduler(KvmSync kvmSync, @Qualifier("KvmLastSyncDateStore") LastSyncDateStore lastSyncDateStore ) {
+		this.updateChangedKvmEntries = kvmSync;
+		this.lastSyncDateStore = lastSyncDateStore;
 	}
 	
 	@Scheduled(fixedRate = 60000, initialDelay = 30000)

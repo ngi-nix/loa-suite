@@ -6,11 +6,9 @@ import org.linkedopenactors.code.similaritychecker.BoundingBox;
 import org.linkedopenactors.code.similaritychecker.SimilarityCheckerLoaAdapter;
 import org.springframework.stereotype.Component;
 
-import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 
 @Component
-@Slf4j
 public class OsmAdapter implements SimilarityCheckerLoaAdapter {
 
 	private OsmRestEndpoint osmRestEndpoint;
