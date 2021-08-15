@@ -20,17 +20,17 @@
 		</dependency>
 		<dependency>
 			<groupId>org.linkedopenactors.code</groupId>
-			<artifactId>loa-wechange-adapter</artifactId>
+			<artifactId>loa-adapter-wechange</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.linkedopenactors.code</groupId>
-			<artifactId>loa-kvm-adapter</artifactId>
+			<artifactId>loa-adapter-kvm</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.linkedopenactors.code</groupId>
-			<artifactId>loa-osm-adapter</artifactId>
+			<artifactId>loa-adapter-osm</artifactId>
 			<version>${project.version}</version>
 		</dependency>		
 		<dependency>

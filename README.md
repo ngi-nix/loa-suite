@@ -19,7 +19,7 @@ This is the linked-open-actors main project. A so called Maven-Multi-Module proj
     Place for code that works as adapter, wrapper, bridge, etc. between the LOA World and the world of other data providers.
         - [loa-kvm-adapter](loa-adapters/loa-kvm-adapter/README.md)  
         Adapters for https://kartevonmorgen.org/ or more https://github.com/kartevonmorgen/openfairdb
-        - [loa-wechange-adapter](loa-adapters/loa-wechange-adapter/README.md)  
+        - [loa-wechange-adapter](loa-adapters/loa-adapter-wechange/README.md)  
         Adapter for the WECHANGE api. WECHANGE is already a LOA-Provider !
         - **loa-csv-adapter** 
         WorkInProgress - Importing LOA Data from csv. Initial imports, that also creates a new Storage for a LOA-Actor.
