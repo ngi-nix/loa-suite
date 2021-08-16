@@ -41,6 +41,11 @@
 			<artifactId>rdf4j-storage</artifactId>
 			<type>pom</type>
 		</dependency>
+		<dependency>	
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-webmvc-core</artifactId>
+			<version>1.5.10</version>
+		</dependency>
 		<dependency>
 			<groupId>com.apicatalog</groupId>
 			<artifactId>titanium-json-ld</artifactId>
