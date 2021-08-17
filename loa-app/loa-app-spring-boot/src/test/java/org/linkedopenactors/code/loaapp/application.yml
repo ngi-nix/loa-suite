@@ -1,0 +1,12 @@
+logging:
+  level:
+    root: WARN
+    org.springframework.web: DEBUG    
+    org.springframework.http: DEBUG
+    org.linkedopenactors: TRACE
+    org.linkedopenactors.code.kvmadapter.initial: TRACE
+#    org.linkedopenactors.code.kvmadapter: INFO
+#    de.naturzukunft.rdf4j.loarepository: INFO
+#    de.naturzukunft.rdf4j.loarepository.BaseObjectRepository: DEBUG
+    de.naturzukunft: DEBUG
+    org.eclipse.rdf4j: INFO

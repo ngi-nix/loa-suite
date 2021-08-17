@@ -54,23 +54,32 @@ public class KvmSync {
 	
 	public Mono<List<ComparatorModel>> sync(LocalDateTime lastSyncDate) throws Exception {
 		LocalDateTime now = LocalDateTime.now();
-		long searchForChangesInTheLastMinutes = ChronoUnit.MINUTES.between(LocalDateTime.now(), lastSyncDate);
-		log.debug("-> UpdateChangedKvmEntries (look for changes in the last "+searchForChangesInTheLastMinutes+" minutes.)");
+		long searchForChangesInTheLastMinutes = ChronoUnit.SECONDS.between(LocalDateTime.now(), lastSyncDate);
+		log.debug("-> UpdateChangedKvmEntries (look for changes in the last "+searchForChangesInTheLastMinutes+" seconds.)");
 		
-		Mono<List<ComparatorModel>> changedPublicationsMono = kvmRestEndpoint
+		return kvmRestEndpoint
 				.getChangedEntriesSince(lastSyncDate.minusSeconds(10))
+				.doOnNext(it->log.debug("processing: " + it))
 				.map(kvmEntry2PublicationComparatorModel::convert)
 				.collectList()
 				.map(cm->save(cm))
-				.doOnSuccess(it->log.debug("<- UpdateChangedKvmEntries (succeeded)"));
-		lastSyncDateStore.lastSync(SUBJECT, now);
-		return changedPublicationsMono;
+				.doOnSuccess(it->{
+					lastSyncDateStore.lastSync(SUBJECT, now);
+					log.debug("<- UpdateChangedKvmEntries (succeeded)");
+					})
+				.onErrorResume(e -> {
+					log.error("error while sync", e);
+					return Mono.error(e);	
+				});
 	}
 
 	private List<ComparatorModel> save(List<ComparatorModel> comparatorModels) {
 		log.debug("save " + comparatorModels.size() + " comparatorModels.");
 		Set<Statement> statements = new HashSet<>();
- 		comparatorModels.forEach(cm->statements.addAll(cm.getModel()));
+ 		comparatorModels.forEach(cm->{
+ 			log.trace("adding " + cm.getSubject() + " to statements for saving.");
+ 			statements.addAll(cm.getModel());	
+ 		});
 		try(RepositoryConnection con = repository.getConnection()) {
 			con.add(statements);
 			return comparatorModels;

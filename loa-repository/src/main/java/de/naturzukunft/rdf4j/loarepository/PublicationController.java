@@ -34,11 +34,13 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 @RestController
 @Slf4j
+@Tag(name = "PublicationController", description = "CRUD functions for Publications.")
 public class PublicationController {
 
 	private LoaRepositoryManager loaRepositoryManager;
@@ -49,20 +51,25 @@ public class PublicationController {
 		this.sparqlQueryEvaluator = sparqlQueryEvaluator;
 	}
 
-	@RequestMapping(value = "/{repositoryId}", method = RequestMethod.GET)
-	public ResponseEntity<Mono<String>> findAllSubjects(@PathVariable("repositoryId") String repositoryId) {
-		return loaRepositoryManager.getRepository(repositoryId).map(repository -> {
-			return new ResponseEntity<Mono<String>>(findAllSubjectsInternal(repository), HttpStatus.OK);
-		}).orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).header("X-Reason", "unkonw repository").build());
+	@RequestMapping(value = "/{repositoryId}", method = RequestMethod.GET, produces = { "application/json" })
+	public Mono<ResponseEntity<String>> findAllSubjects(@PathVariable("repositoryId") String repositoryId, @RequestParam(required = false) String identifier, @RequestHeader Map<String, String> headers) {
+		if(identifier != null) {
+			String query = getByIdentifierQuery(identifier);
+			return Mono.just(sparql(repositoryId, query,null,headers,null));
+		} else {		
+			return loaRepositoryManager.getRepository(repositoryId).map(repository -> {
+				return findAllSubjectsInternal(repository).map(result->new ResponseEntity<String>(result, HttpStatus.OK));
+			}).orElse(Mono.just(ResponseEntity.status(HttpStatus.NOT_FOUND).header("X-Reason", "unkonw repository '" + repositoryId + "'").build()));
+		}
 	}
 
 	@GetMapping(path = "/{repositoryId}/{id}", produces = { "application/json-ld" })
 	public ResponseEntity<Mono<String>> findByIdJsonLd(@PathVariable("repositoryId") String repositoryId, @PathVariable("id") String id) {
 		return loaRepositoryManager.getRepository(repositoryId).map(repository -> {
 			try( RepositoryConnection con = repository.getConnection()) {
-				String model = JsonLdFormatter.compact(toModel(con.getStatements(null, null, null, iri(id))));
-//				model = JsonLdFormatter.flatten(toModel(con.getStatements(null, null, null, iri(id))));
-//				model = JsonLdFormatter.frame(toModel(con.getStatements(null, null, null, iri(id))));
+				String model = JsonLdFormatter.compact(toModel(con.getStatements(iri(id), null, null)));
+//				model = JsonLdFormatter.flatten(toModel(con.getStatements(iri(id), null, null)));
+//				model = JsonLdFormatter.frame(toModel(con.getStatements(iri(id), null, null)));
 				return new ResponseEntity<Mono<String>>(Mono.just(model), HttpStatus.OK);
 			}
 		}).orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).header("X-Reason", "unkonw repository").build());
@@ -77,7 +84,7 @@ public class PublicationController {
 
 	private Mono<String> findByIdInternal(RDFFormat rdfFormat, Repository repository, String id) {
 		try( RepositoryConnection con = repository.getConnection()) {
-			return Mono.just(toRdf(rdfFormat, toModel(con.getStatements(null, null, null, iri(id)))));
+			return Mono.just(toRdf(rdfFormat, toModel(con.getStatements(iri(id), null, null))));
 		}
 	}
 
@@ -208,5 +215,22 @@ public class PublicationController {
 		StringWriter sw = new StringWriter();
 		Rio.write(model, sw, rdfFormat);
 		return sw.toString();
+	}
+	
+	private String getByIdentifierQuery(String identifier) {
+		return "PREFIX schema: <http://schema.org/> \n"
+				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n"
+				+ "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+				+ "SELECT DISTINCT *\n"
+				+ "WHERE { \n"
+				+ "	?s rdf:type schema:CreativeWork .  	\n"
+				+ "  	?s schema:identifier ?identifier .\n"
+				+ "    ?s schema:about/schema:name ?name .\n"
+				+ "    ?s schema:about/schema:url ?url .\n"
+				+ "  	?s schema:description ?description .\n"
+				+ "    OPTIONAL {?s schema:about/schema:location/schema:latitude ?latitude . }\n"
+				+ "    OPTIONAL {?s schema:about/schema:location/schema:longitude ?longitude . }\n"
+				+ "    FILTER( ?identifier = \""+identifier+"\" ) .\n"
+				+ "} LIMIT 10";
 	}
 }

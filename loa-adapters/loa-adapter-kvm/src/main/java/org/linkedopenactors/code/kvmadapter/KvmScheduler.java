@@ -14,6 +14,6 @@ public class KvmScheduler {
 	
 	@Scheduled(fixedRate = 60000, initialDelay = 30000)
 	public void getKvmUpdate() {
-		updateChangedKvmEntries.sync();
+		updateChangedKvmEntries.sync().block();
 	}
 }
