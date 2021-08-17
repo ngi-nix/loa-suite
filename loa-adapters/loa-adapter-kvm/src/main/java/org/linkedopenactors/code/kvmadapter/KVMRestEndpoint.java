@@ -3,7 +3,6 @@ package org.linkedopenactors.code.kvmadapter;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -25,7 +24,7 @@ public class KVMRestEndpoint {
 		this.webClient = WebClient.builder().build();
 	}
 	
-	public List<KvmEntry> getChangedEntriesSince(LocalDateTime since) {
+	public Flux<KvmEntry> getChangedEntriesSince(LocalDateTime since) {
 
 		LocalDateTime now = LocalDateTime.now();
 		ZoneId zone = ZoneId.of("Europe/Berlin");
@@ -41,8 +40,7 @@ public class KVMRestEndpoint {
 				.retrieve()
 				.bodyToFlux(KvmEntry.class);
 
-		List<KvmEntry> entries = response.collectList().block();
-		return entries;
+		return response;
 	}
 	
 	public Flux<KvmEntry> findByBoundingBox(Double latleftTop, Double lngleftTop, Double latRightBottom,

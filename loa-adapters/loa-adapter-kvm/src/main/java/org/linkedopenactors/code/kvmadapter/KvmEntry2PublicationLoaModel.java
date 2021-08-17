@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.TimeZone;
+import java.util.stream.Collectors;
 
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
@@ -111,8 +112,11 @@ class KvmEntry2PublicationComparatorModel {
 		if(entry.getLicense()!=null ) {model.add(subject, SCHEMA_ORG.license, literal(entry.getLicense()));}
 			
 		model.addAll(organisation.getModel());
-			
-		entry.getTags().forEach(tag -> model.add(subject, SCHEMA_ORG.keywords, literal(tag)));
+		
+		if(entry.getTags() != null && !entry.getTags().isEmpty()) {
+			String tagsCsv = entry.getTags().stream().collect(Collectors.joining(","));
+			model.add(subject, SCHEMA_ORG.keywords, literal(tagsCsv));
+		}
 		
 		if( entry.getCreated() != null ) {
 			long created = entry.getCreated();
