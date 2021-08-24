@@ -65,7 +65,7 @@ public abstract class AbstractCsvImporter implements CsvImporter {
 	/**
 	 * Converts a csv record into a set of statements (Model).
 	 * @param record The csv record to convert
-	 * @return A {@link ComparatorModel} containing the data of the csv record.
+	 * @return A {@link SubjectModelPair} containing the data of the csv record.
 	 */
 	protected abstract SubjectModelPair convert(CSVRecord record);
 	
