@@ -17,7 +17,7 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>loa-distanceCalculator</artifactId>
+			<artifactId>loa-algorithm-distanceCalculator</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

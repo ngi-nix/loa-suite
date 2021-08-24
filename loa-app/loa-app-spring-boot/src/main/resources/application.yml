@@ -10,11 +10,12 @@ logging:
     root: WARN
     org.springframework.web: INFO    
     org.linkedopenactors: TRACE
+    org.linkedopenactors.code.kvmadapter.initial: TRACE
 #    org.linkedopenactors.code.kvmadapter: INFO
 #    de.naturzukunft.rdf4j.loarepository: INFO
-#    de.naturzukunft.rdf4j.loarepository.BaseObjectRepository: DEBUG    
-    de.naturzukunft: INFO
-    org.eclipse.rdf4j: WARN    
+#    de.naturzukunft.rdf4j.loarepository.BaseObjectRepository: DEBUG
+    de.naturzukunft: DEBUG
+    org.eclipse.rdf4j: INFO    
 management:
   endpoints:
     enabled-by-default: false

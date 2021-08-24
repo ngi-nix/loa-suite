@@ -1,5 +1,9 @@
 package org.linkedopenactors.code.kvmadapter.initial;
 
+/**
+ * Column names of a csv file, that is exported from https://github.com/kartevonmorgen/openfairdb.
+ * Ask info@kartevonmorgen.org for more information about the csv export.
+ */
 public enum KvmCsvNames {
 
 	id, created_at, created_by, version, title,

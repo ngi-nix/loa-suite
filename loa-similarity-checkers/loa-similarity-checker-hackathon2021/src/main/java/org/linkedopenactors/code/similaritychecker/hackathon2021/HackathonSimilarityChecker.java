@@ -10,10 +10,7 @@ import org.linkedopenactors.code.similaritychecker.SimilarityChecker;
 import org.linkedopenactors.code.similaritychecker.SimilarityCheckerResult;
 import org.springframework.stereotype.Component;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Component
-@Slf4j
 public class HackathonSimilarityChecker implements SimilarityChecker {
 
 	private static final String LOA_SIMILARITY_CHECKER_HACKATHON2021 = "loa-similarity-checker-hackathon2021";

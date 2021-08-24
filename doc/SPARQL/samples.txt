@@ -1,0 +1,57 @@
+###################################################################
+###
+### Search publications
+###
+###################################################################
+PREFIX schema: <http://schema.org/> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT DISTINCT *
+WHERE { 
+	?s rdf:type schema:CreativeWork .  	
+  	?s schema:identifier ?identifier .
+    OPTIONAL {?s schema:about/schema:name ?name .}
+    OPTIONAL {?s schema:about/schema:url ?url .}
+  	?s schema:description ?description .
+  	OPTIONAL {?s schema:keywords ?keywords .}
+    OPTIONAL {?s schema:about/schema:location/schema:latitude ?lat . }
+    OPTIONAL {?s schema:about/schema:location/schema:longitude ?lon . }
+} LIMIT 100
+
+
+###################################################################
+###
+### Search publications by tag
+###
+###################################################################
+PREFIX schema: <http://schema.org/> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT DISTINCT ?identifier ?name ?keywords
+WHERE { 
+	?s rdf:type schema:CreativeWork .  	
+  	?s schema:identifier ?identifier .
+  	OPTIONAL {?s schema:about/schema:name ?name .}
+  	?s schema:keywords ?keywords .
+    FILTER( ?keywords = "fhtest" ) .
+} LIMIT 100
+
+###################################################################
+###
+### publication by identifier
+###
+###################################################################
+
+PREFIX schema: <http://schema.org/> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT DISTINCT *
+WHERE { 
+	?s rdf:type schema:CreativeWork .  	
+  	?s schema:identifier "4a28e38695854059a457beb3b53c2578" .
+    ?s schema:about/schema:name ?name .
+    ?s schema:about/schema:url ?url .
+  	?s schema:description ?description .
+    OPTIONAL {?s schema:about/schema:location/schema:latitude ?latitude . }
+    OPTIONAL {?s schema:about/schema:location/schema:longitude ?longitude . }
+} LIMIT 10

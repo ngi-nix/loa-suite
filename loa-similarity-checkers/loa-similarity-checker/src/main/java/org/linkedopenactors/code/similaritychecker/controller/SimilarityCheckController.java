@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
-import org.linkedopenactors.code.similaritychecker.BoundingBox;
 import org.linkedopenactors.code.similaritychecker.SimilarityCheckerResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
