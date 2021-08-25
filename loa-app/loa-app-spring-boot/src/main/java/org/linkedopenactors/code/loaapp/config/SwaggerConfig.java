@@ -1,5 +1,7 @@
 package org.linkedopenactors.code.loaapp.config;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +15,7 @@ import io.swagger.v3.oas.models.security.OAuthFlow;
 import io.swagger.v3.oas.models.security.OAuthFlows;
 import io.swagger.v3.oas.models.security.Scopes;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.servers.Server;
 
 @Configuration
 public class SwaggerConfig {
@@ -27,13 +30,23 @@ public class SwaggerConfig {
 
     @Bean
     public OpenAPI openAPI() {
-        return new OpenAPI()
+        return new OpenAPI().servers(servers())
                 .info(info())
                 .components(securityComponents())
                 .addSecurityItem(securityRequirement());
     }
 
-    private Info info() {
+    private List<Server> servers() {
+		Server server = new Server();
+		server.setUrl("https://loa.test.opensourceecology.de");
+		server.setDescription("LOA Test Environment");
+		Server serverlocal = new Server();
+		serverlocal.setUrl("http://localhost:8090");
+		serverlocal.setDescription("LOA Local Environment");
+		return List.of(server,serverlocal);
+	}
+
+	private Info info() {
         return new Info()
                 .title("Linked Open Actors API")
                 .description(

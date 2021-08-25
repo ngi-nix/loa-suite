@@ -37,7 +37,7 @@ public class CsvImportController {
 	
 	@Operation(summary = "Imports entries of a csv file into a temporary repository.",
             description = "Imports entries of a csv file into a temporary repository. This repository will automatically deleted aftrer a few days. This operation was implemented for testing purposes",
-			requestBody = @RequestBody(description = "The cvs file.", 
+			requestBody = @RequestBody(description = "The cvs file. Headlines: PublicationLoa_version, PublicationLoa_copyrightNotice, PublicationLoa_creativeWorkStatus, PublicationLoa_dateCreated, PublicationLoa_dateModified, PublicationLoa_license, PublicationLoa_keywords, PublicationLoa_identifier, PublicationLoa_description, OrgansationLoa_legalName, OrgansationLoa_name, OrgansationLoa_url, PlaceLoa_latitude, PlaceLoa_longitude, PostalAddressLoa_postalCode, PostalAddressLoa_addressLocality, PostalAddressLoa_addressRegion, PostalAddressLoa_addressCountry, PostalAddressLoa_streetAddress, ContactPointLoa_email, ContactPointLoa_name, ContactPointLoa_telephone", 
 									required = true, 
 									content = @Content(mediaType = org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE, 
 										examples = @ExampleObject(value = "pubs.csv")))
@@ -54,10 +54,17 @@ public class CsvImportController {
 			filePart.content()
 				.map(dataBuffer ->dataBuffer.asInputStream())
 				.map(inputStream -> doImport(filePart.filename(), inputStream)));
-		return repoIdFlux.map(repoId->"http://" + serverHttpRequest.getURI().getHost() + ":" + serverHttpRequest.getURI().getPort() + "/" + repoId);
-		
+		return repoIdFlux.map(repoId->getResponseString(repoId, serverHttpRequest.getURI().getHost(), serverHttpRequest.getURI().getPort()));
 	}
 
+	private String getResponseString(String repositoryId, String host, int port) {
+		String portString = "";
+		if(port!=-1) {
+			portString = ":" + port;
+		}
+		return "http://" + host + portString + "/" + repositoryId;
+	}
+	
 	/**
 	 * Copies all entries of the passed csv file input stream to a newly created temporary repository.
 	 * @param filename The name of the csv file

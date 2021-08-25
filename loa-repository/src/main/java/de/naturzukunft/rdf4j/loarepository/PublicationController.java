@@ -54,6 +54,7 @@ public class PublicationController {
 	@RequestMapping(value = "/{repositoryId}", method = RequestMethod.GET, produces = { "application/json" })
 	public Mono<ResponseEntity<String>> findAllSubjects(@PathVariable("repositoryId") String repositoryId, @RequestParam(required = false) String identifier, @RequestHeader Map<String, String> headers) {
 		if(identifier != null) {
+			log.trace("findAllSubjects with identifier: " + identifier);
 			String query = getByIdentifierQuery(identifier);
 			return Mono.just(sparql(repositoryId, query,null,headers,null));
 		} else {		
@@ -225,9 +226,9 @@ public class PublicationController {
 				+ "WHERE { \n"
 				+ "	?s rdf:type schema:CreativeWork .  	\n"
 				+ "  	?s schema:identifier ?identifier .\n"
-				+ "    ?s schema:about/schema:name ?name .\n"
-				+ "    ?s schema:about/schema:url ?url .\n"
-				+ "  	?s schema:description ?description .\n"
+				+ "    OPTIONAL {?s schema:about/schema:name ?name .}\n"
+				+ "    OPTIONAL {?s schema:about/schema:url ?url .}\n"
+				+ "    OPTIONAL {?s schema:description ?description .}\n"
 				+ "    OPTIONAL {?s schema:about/schema:location/schema:latitude ?latitude . }\n"
 				+ "    OPTIONAL {?s schema:about/schema:location/schema:longitude ?longitude . }\n"
 				+ "    FILTER( ?identifier = \""+identifier+"\" ) .\n"
