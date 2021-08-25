@@ -21,10 +21,13 @@ import io.swagger.v3.oas.models.servers.Server;
 public class SwaggerConfig {
 
     @Value("${app.version:unknown}")
-    String version;
+    private String version;
 
+    @Value("${app.baseNamespace}") 
+    private String baseNamespace;
+    
     @Value("${springdoc.swagger-ui.oauth.token-url}")
-    String tokenUrl;
+    private String tokenUrl;
 
     final String OAUTH2_SCHEMA_NAME = "Keycloak";
 
@@ -38,12 +41,9 @@ public class SwaggerConfig {
 
     private List<Server> servers() {
 		Server server = new Server();
-		server.setUrl("https://loa.test.opensourceecology.de");
-		server.setDescription("LOA Test Environment");
-		Server serverlocal = new Server();
-		serverlocal.setUrl("http://localhost:8090");
-		serverlocal.setDescription("LOA Local Environment");
-		return List.of(server,serverlocal);
+		server.setUrl(baseNamespace);
+		server.setDescription("LOA Environment");
+		return List.of(server, server);
 	}
 
 	private Info info() {

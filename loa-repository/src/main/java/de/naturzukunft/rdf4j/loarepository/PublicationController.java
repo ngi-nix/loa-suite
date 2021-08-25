@@ -51,6 +51,26 @@ public class PublicationController {
 		this.sparqlQueryEvaluator = sparqlQueryEvaluator;
 	}
 
+	
+	@Operation(summary = "Shows a list of all available publications for a repositoryId. Optional: by identifier!",
+            description = "Shows a list of all available publications for a repositoryId. Attention !! Could be a large amount of values !",
+	parameters = {			
+			@Parameter(in = ParameterIn.PATH,
+					name = "repositoryId", 
+					description = "The id of the repository to search for. E.g. kvm_loa, wechange_loa",
+					content = @Content(
+							mediaType = org.springframework.http.MediaType.APPLICATION_JSON_VALUE,
+							examples = @ExampleObject (value = "kvm_loa")
+							)),
+    		@Parameter(in = ParameterIn.QUERY,
+					name = "identifier", 
+					description = "The identifier of a specific entry. NOT the subject of the entry!",
+					content = @Content(
+							mediaType = org.springframework.http.MediaType.APPLICATION_JSON_VALUE,
+							examples = @ExampleObject (value = "4a28e38695854059a457beb3b53c2578")
+							))
+			}
+	)
 	@RequestMapping(value = "/{repositoryId}", method = RequestMethod.GET, produces = { "application/json" })
 	public Mono<ResponseEntity<String>> findAllSubjects(@PathVariable("repositoryId") String repositoryId, @RequestParam(required = false) String identifier, @RequestHeader Map<String, String> headers) {
 		if(identifier != null) {
@@ -64,28 +84,66 @@ public class PublicationController {
 		}
 	}
 
-	@GetMapping(path = "/{repositoryId}/{id}", produces = { "application/json-ld" })
-	public ResponseEntity<Mono<String>> findByIdJsonLd(@PathVariable("repositoryId") String repositoryId, @PathVariable("id") String id) {
+	@Operation(summary = "Shows the details about a publication.",
+			operationId = "findByIdJsonLd",
+            description = "Shows the details about a publication.",
+        	parameters = {			
+        			@Parameter(in = ParameterIn.PATH,
+        					name = "repositoryId", 
+        					description = "The id of the repository to search for. E.g. kvm_loa, wechange_loa",
+        					content = @Content(
+        							mediaType = org.springframework.http.MediaType.APPLICATION_JSON_VALUE,
+        							examples = @ExampleObject (value = "kvm_loa")
+        							)),
+        			@Parameter(in = ParameterIn.QUERY,
+        					name = "subject", 
+        					description = "The id (subject) of the publication. E.g. kvm:V19_4a28e38695854059a457beb3b53c2578",
+        					content = @Content(
+        							mediaType = org.springframework.http.MediaType.APPLICATION_JSON_VALUE,
+        							examples = @ExampleObject (value = "kvm:V19_4a28e38695854059a457beb3b53c2578")
+        							)),        			
+					@Parameter(in = ParameterIn.HEADER,
+							name = "accept", 
+							description = "This is set by swagger automatically. Ignore the inputFild"
+							)
+					},
+        	responses = {
+					@ApiResponse(									
+							responseCode = "200",
+							content = {@Content(
+									mediaType = "application/json-ld"
+							),@Content(
+									mediaType = "text/turtle"
+							)}
+					)
+			}
+	)          
+	@GetMapping(path = "/{repositoryId}/{subject}", produces = { "application/json-ld", "text/turtle" })
+	public ResponseEntity<Mono<String>> findByIdJsonLd(
+			@RequestHeader(name = "accept", required = false) String acceptHeader,
+			@PathVariable("repositoryId") String repositoryId, @RequestParam("subject") String subject) {
 		return loaRepositoryManager.getRepository(repositoryId).map(repository -> {
-			try( RepositoryConnection con = repository.getConnection()) {
-				String model = JsonLdFormatter.compact(toModel(con.getStatements(iri(id), null, null)));
-//				model = JsonLdFormatter.flatten(toModel(con.getStatements(iri(id), null, null)));
-//				model = JsonLdFormatter.frame(toModel(con.getStatements(iri(id), null, null)));
-				return new ResponseEntity<Mono<String>>(Mono.just(model), HttpStatus.OK);
+			if("application/json-ld".equals(acceptHeader)) {
+				return findByIdJsonLd(subject, repository);	
+			} else {
+				return findByIdTurtle(subject, repository);
 			}
 		}).orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).header("X-Reason", "unkonw repository").build());
 	}
 
-	@GetMapping(path = "/{repositoryId}/{id}", produces = { "text/turtle" })
-	public ResponseEntity<Mono<String>> findById(@PathVariable("repositoryId") String repositoryId, @PathVariable("id") String id) {
-		return loaRepositoryManager.getRepository(repositoryId).map(repository -> {
-			return new ResponseEntity<Mono<String>>(findByIdInternal(RDFFormat.TURTLE, repository, id), HttpStatus.OK);
-		}).orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).header("X-Reason", "unkonw repository").build());
+	private ResponseEntity<Mono<String>> findByIdJsonLd(String subject, Repository repository) {
+		try( RepositoryConnection con = repository.getConnection()) {
+			String model = JsonLdFormatter.compact(toModel(con.getStatements(iri(subject), null, null)));
+//				model = JsonLdFormatter.flatten(toModel(con.getStatements(iri(subject), null, null)));
+//				model = JsonLdFormatter.frame(toModel(con.getStatements(iri(subject), null, null)));
+			return new ResponseEntity<Mono<String>>(Mono.just(model), HttpStatus.OK);
+		}
 	}
 
-	private Mono<String> findByIdInternal(RDFFormat rdfFormat, Repository repository, String id) {
+	private ResponseEntity<Mono<String>> findByIdTurtle(String subject, Repository repository) {
 		try( RepositoryConnection con = repository.getConnection()) {
-			return Mono.just(toRdf(rdfFormat, toModel(con.getStatements(iri(id), null, null))));
+			Mono<String> r = Mono.just(toRdf(RDFFormat.TURTLE, toModel(con.getStatements(iri(subject), null, null))));
+			return new ResponseEntity<Mono<String>>(r, HttpStatus.OK);
 		}
 	}
 
@@ -106,6 +164,41 @@ public class PublicationController {
 		return model;
 	}
 
+	@Operation(summary = "Execute a SPARQL query against a loa repository.",
+            description = "Execute a SPARQL query against a loa repository.",
+        	parameters = {			
+        			@Parameter(in = ParameterIn.PATH,
+        					name = "repositoryId", 
+        					description = "The id of the repository to search for. E.g. kvm_loa, wechange_loa",
+        					content = @Content(
+        							mediaType = org.springframework.http.MediaType.APPLICATION_JSON_VALUE,
+        							examples = @ExampleObject (value = "kvm_loa")
+        							)),
+        			@Parameter(in = ParameterIn.QUERY,
+        					name = "query", 
+        					description = "The SPARQL query to execute",
+        					content = @Content(
+        							mediaType = org.springframework.http.MediaType.APPLICATION_JSON_VALUE,
+        							examples = @ExampleObject (value = "SELECT * WHERE {?subject ?predicate ?object} LIMIT 100")
+        							)),
+					@Parameter(in = ParameterIn.QUERY,
+							name = "defaultGraphUri", 
+							description = "ignorable for now."
+							),
+					@Parameter(in = ParameterIn.QUERY,
+							name = "namedGraphUri", 
+							description = "ignorable for now."
+							)
+					},
+        	responses = {
+					@ApiResponse(									
+							responseCode = "200",
+							content = {@Content(
+									mediaType = "application/json"
+							)}
+					)
+			}
+	)          
 	@GetMapping(path = "/{repositoryId}/sparql", produces = { "application/json" })
 	public ResponseEntity<String> sparql(@PathVariable("repositoryId") String repositoryId, @RequestParam String query,
 			 @RequestParam(required = false) String defaultGraphUri,
@@ -135,8 +228,8 @@ public class PublicationController {
     	}).orElse(new ResponseEntity<String>("No repository with id " + repositoryId, HttpStatus.NOT_FOUND));
     }
 
-	@Operation(summary = "Do a surrounding area search. !!! UNDER CONSTRUCTION !!!",
-            description = "Do a surrounding area search. Limited to 1000 result entries.",
+	@Operation(summary = "Do a surrounding area search.",
+            description = "Do a surrounding area search. Limited to 1000 result entries. The default geolocation is Witzenhausen",
             		parameters = {			
             				@Parameter(in = ParameterIn.PATH,
     								name = "repositoryId", 
@@ -164,7 +257,7 @@ public class PublicationController {
 								description = "the distance of the surrounding area.",
 								content = @Content(
 										mediaType = org.springframework.http.MediaType.APPLICATION_JSON_VALUE,
-										examples = @ExampleObject (value = "100 (hardcoded!)")										
+										examples = @ExampleObject (value = "10")										
 										))
 							}
     )
@@ -190,15 +283,37 @@ public class PublicationController {
 				+ "  	?s schema:description ?description .\n"
 				+ "    OPTIONAL {?s schema:about/schema:location/schema:latitude ?lat . }\n"
 				+ "    OPTIONAL {?s schema:about/schema:location/schema:longitude ?lon . }\n"
-				+ "    FILTER( (${lat}-xsd:float(?lat))*(${lat}-xsd:float(?lat)) + (${lon}-xsd:float(?lon))*(${lon}-xsd:float(?lon))*(0.831939969105-(${calculated1}*xsd:float(?lat))) < 0.808779738472242 ) .\n"
+				+ "    FILTER( (${lat}-xsd:float(?lat))*(${lat}-xsd:float(?lat)) + (${lon}-xsd:float(?lon))*(${lon}-xsd:float(?lon))*(${calculated2}-(${calculated1}*xsd:float(?lat))) < ${d2brgrad} ) .\n"
 				+ "} LIMIT 1000";
 		query = query.replace("${lat}", latitude);
 		query = query.replace("${lon}", longitude);
-		query = query.replace("${calculated1}", Double.toString(0.00853595));
-		
-//		System.out.println("query: " + query);
+		query = query.replace("${calculated1}", Double.toString(calculateFirstValue(51)));
+		query = query.replace("${calculated2}", Double.toString(calculateSecondValue(51, Double.parseDouble(latitude))));
+		query = query.replace("${d2brgrad}", Double.toString(calculateD2brgrad(Double.parseDouble(distance))));
+		System.out.println("query: " + query);
 		return sparql(repositoryId, query, null, headers, null);
 
+	}
+	
+	private double calculateFirstValue(double refLat) {
+		double refLatRadian = Math.toRadians(refLat);
+		double cos = Math.cos(refLatRadian);
+		double sin = Math.sin(refLatRadian);
+		double calculated1 = cos * sin * (Math.PI / 180);
+		return calculated1;
+	}
+	
+	private double calculateSecondValue(double refLat, double lat) {
+		double refLatRadian = Math.toRadians(refLat);
+		double calculated2 = Math.cos(refLatRadian)*(Math.cos(refLatRadian) - Math.sin(refLatRadian)*Math.PI/180*(lat -2*refLat));
+		return calculated2;
+	}
+
+	private double calculateD2brgrad(double distance) {
+		double brgrad = 111.1949;
+		double q = (distance / brgrad);
+		double d2brgrad = Math.pow(q, 2);
+		return d2brgrad;
 	}
 	
 	private String execute(Repository repository, String query, String acceptHeader, String defaultGraphUri,

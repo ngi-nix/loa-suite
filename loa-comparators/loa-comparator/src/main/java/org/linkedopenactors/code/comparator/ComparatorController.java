@@ -31,8 +31,8 @@ public class ComparatorController {
 		this.comparators = comparators;
 	}
 	
-	@Operation(summary = "Do a similarityCheck",
-            description = "Do a similarityCheck"
+	@Operation(summary = "List the availabe comparators.",
+            description = "List the availabe comparators."
     )
 	@ApiResponse(
             content = @Content(mediaType = "application/json",

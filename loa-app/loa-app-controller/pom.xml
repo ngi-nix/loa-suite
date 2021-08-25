@@ -22,7 +22,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.linkedopenactors.code</groupId>
-			<artifactId>loa-algorithm-distanceCalculator</artifactId>
+			<artifactId>loa-algorithm-fuzzySearch</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

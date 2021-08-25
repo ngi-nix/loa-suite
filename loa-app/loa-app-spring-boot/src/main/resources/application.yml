@@ -39,10 +39,8 @@ springdoc:
             clientSecret: loa
     writer-with-default-pretty-printer: true
 app:
-#  rdfRepositoryHome: /mnt/spring
   rdfRepositoryHome: target/repoManager
-#  baseNamespace: http://localhost:8080/
-  baseNamespace: https://loa.test.opensourceecology.de/
+  baseNamespace: http://localhost:8090/
   baseSubjectSystem: https://loa.test.opensourceecology.de/system/
   searchForChangesInTheLastMinutes: 180
   kvmUrl: https://api.ofdb.io/v0/

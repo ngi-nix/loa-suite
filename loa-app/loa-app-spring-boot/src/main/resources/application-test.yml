@@ -1,5 +1,6 @@
 app:
   rdfRepositoryHome: /mnt/spring
+  baseNamespace: https://loa.test.opensourceecology.de/
 logging:
   file: 
     name: /mnt/spring/logs/client.log
