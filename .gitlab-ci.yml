@@ -15,20 +15,20 @@ cache:
 #before_script:
  #   - export MAVEN_USER_HOME=`pwd`/.maven
         
-mvn-install:
-    stage: build
-    only:
-      refs:
-        - /^feature.*$/
-    script:
-      - 'mvn clean install -U -DskipTests -s ci_settings.xml'
-      - mkdir -p loa-app/loa-app-spring-boot/target/dependency && (cd loa-app/loa-app-spring-boot/target/dependency; jar -xf ../*.jar)
-    artifacts:
-      paths:
-          - loa-app/loa-app-spring-boot/target/classes/
-          - loa-app/loa-app-spring-boot/target/generated-sources/
-          - loa-app/loa-app-spring-boot/target/dependency/
-      expire_in: 1 day
+# mvn-install:
+#     stage: build
+#     only:
+#       refs:
+#         - /^feature.*$/
+#     script:
+#       - 'mvn clean install -U -DskipTests -s ci_settings.xml'
+#       - mkdir -p loa-app/loa-app-spring-boot/target/dependency && (cd loa-app/loa-app-spring-boot/target/dependency; jar -xf ../*.jar)
+#     artifacts:
+#       paths:
+#           - loa-app/loa-app-spring-boot/target/classes/
+#           - loa-app/loa-app-spring-boot/target/generated-sources/
+#           - loa-app/loa-app-spring-boot/target/dependency/
+#       expire_in: 1 day
 
 maven-site:
     stage: deploy
@@ -59,21 +59,15 @@ maven-deploy:
           - loa-app/loa-app-spring-boot/target/generated-sources/
           - loa-app/loa-app-spring-boot/target/dependency/
       expire_in: 1 day
-       
+
 build-push-image:
   stage: deploy
   only:
     - /^feature.*$/
     - develop
     - tags
-  image:
-    name: gcr.io/kaniko-project/executor:debug
-    entrypoint: [""]
+  image: nixpkgs/nix-flakes
   script:
-    - ls -lsa $CI_PROJECT_DIR/loa-app/loa-app-spring-boot
-    - ls -lsa $CI_PROJECT_DIR/loa-app/loa-app-spring-boot/target
-    - ls -lsa $CI_PROJECT_DIR/loa-app/loa-app-spring-boot/target/dependency
-    - mkdir -p /kaniko/.docker
-    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-    - /kaniko/executor --context $CI_PROJECT_DIR/loa-app/loa-app-spring-boot --dockerfile $CI_PROJECT_DIR/loa-app/loa-app-spring-boot/Dockerfile --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
-    
+    - mkdir -p /var/tmp/
+    - nix build .\#docker
+    - nix run nixpkgs\#skopeo -- --insecure-policy copy --dest-creds "$CI_REGISTRY_USER:$CI_REGISTRY_PASSWORD" docker-archive:./result docker://$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
