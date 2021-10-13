@@ -1,0 +1,33 @@
+diff --git a/loa-app/loa-app-spring-boot/pom.xml b/loa-app/loa-app-spring-boot/pom.xml
+index 839cc21..718d649 100644
+--- a/loa-app/loa-app-spring-boot/pom.xml
++++ b/loa-app/loa-app-spring-boot/pom.xml
+@@ -129,28 +129,6 @@
+ 					</execution>
+ 				</executions>
+ 			</plugin>
+-	 		<plugin>
+-                <groupId>pl.project13.maven</groupId>
+-                <artifactId>git-commit-id-plugin</artifactId>
+-                <executions>
+-                    <execution>
+-                        <id>get-the-git-infos</id>
+-                        <goals>
+-                            <goal>revision</goal>
+-                        </goals>
+-                        <phase>initialize</phase>
+-                    </execution>
+-                </executions>
+-                <configuration>
+-                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
+-                    <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+-                    <includeOnlyProperties>
+-                        <includeOnlyProperty>^git.build.(time|version)$</includeOnlyProperty>
+-                        <includeOnlyProperty>^git.commit.id.(abbrev|full)$</includeOnlyProperty>
+-                    </includeOnlyProperties>
+-                    <commitIdGenerationMode>full</commitIdGenerationMode>
+-                </configuration>
+-            </plugin>
+ 		</plugins>
+ 	</build>
+ 
